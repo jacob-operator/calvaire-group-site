@@ -62,19 +62,17 @@ header .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 header .btn{min-height:42px;padding:0 18px;font-size:.95rem}
 
 /* Sticky header */
-header{position:sticky;top:0;z-index:50;transition:padding .3s ease,box-shadow .3s ease}
+header{position:sticky;top:0;z-index:50;transition:padding .2s ease}
 header.scrolled{padding:10px 0;box-shadow:0 1px 0 rgba(255,255,255,.08)}
 
-/* Hero with video background */
-.hero{position:relative;overflow:hidden;background:var(--sea);color:var(--white);min-height:calc(100svh - 76px);display:flex;align-items:flex-end;padding:clamp(56px,10vw,120px) 0 clamp(48px,8vw,96px)}
+/* Hero with one art video */
+.hero{position:relative;overflow:hidden;background:var(--sea);color:var(--white);min-height:calc(100svh - 76px);display:flex;align-items:flex-end;padding:clamp(56px,10vw,120px) 0 clamp(40px,8vw,96px)}
 .hero-bg{position:absolute;inset:0;z-index:0}
-.hero-bg video{display:block;object-fit:cover;background:var(--sea)}
-.hero-mobile{position:absolute;inset:0;width:100%;height:100%}
-.wall{display:none}
-.scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,42,63,.3) 0%,rgba(11,42,63,.7) 42%,rgba(11,42,63,.97) 78%)}
+.hero-video{position:absolute;left:0;top:0;width:100%;height:58%;object-fit:cover;object-position:50% 50%;background:var(--sea)}
+.scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,42,63,0) 0%,rgba(11,42,63,0) 42%,var(--sea) 60%)}
 .hero-content{position:relative;z-index:1;width:100%}
-.hero h1{margin-bottom:24px;max-width:12ch}
-.hero .lede{margin-bottom:32px;color:rgba(255,255,255,.86)}
+.hero h1{margin-bottom:20px;max-width:12ch}
+.hero .lede{margin-bottom:28px;color:rgba(255,255,255,.86)}
 .hero .btn-key{background:var(--white);border-color:var(--white);color:var(--sea)}
 .hero .btn-key:hover{background:transparent;color:var(--white)}
 .hero .btn-ghost{border-color:var(--white);color:var(--white)}
@@ -82,26 +80,22 @@ header.scrolled{padding:10px 0;box-shadow:0 1px 0 rgba(255,255,255,.08)}
 .hero :focus-visible{outline-color:var(--white)}
 .cta-row{display:flex;flex-wrap:wrap;gap:12px}
 @media (min-width:820px){
-  .hero{align-items:center;min-height:min(calc(100svh - 76px),860px)}
-  .hero-bg .hero-mobile{display:none}
-  .wall{display:grid;position:absolute;top:-8%;bottom:-8%;right:-3%;width:min(54%,820px);grid-template-columns:repeat(4,1fr);gap:16px;transform:rotate(-4deg)}
-  .wall .col{display:grid;align-content:center;animation:drift 18s ease-in-out infinite alternate}
-  .wall .col:nth-child(even){animation-direction:alternate-reverse;animation-duration:22s}
-  .wall video{width:100%;aspect-ratio:9/16;border-radius:18px}
-  .scrim{background:linear-gradient(90deg,var(--sea) 0%,var(--sea) 26%,rgba(11,42,63,.72) 48%,rgba(11,42,63,.2) 100%)}
+  .hero{align-items:center;min-height:min(calc(100svh - 76px),900px)}
+  .hero-video{height:100%}
+  .scrim{background:linear-gradient(90deg,rgba(11,42,63,.95) 0%,rgba(11,42,63,.7) 38%,rgba(11,42,63,0) 65%)}
+  .hero h1.display{font-size:clamp(2.6rem,5.2vw,5.2rem);max-width:10ch}
+  .hero .lede{max-width:36ch}
 }
-@keyframes drift{from{transform:translateY(-7%)}to{transform:translateY(7%)}}
 
-/* Hero entrance: one orchestrated sequence */
-.js .hero h1 .ln{display:block;overflow:hidden;padding-bottom:.06em}
-.js .hero h1 .ln>span{display:block;transform:translateY(105%);transition:transform .9s cubic-bezier(.2,.7,.1,1)}
-.js .hero h1 .ln:nth-child(2)>span{transition-delay:.12s}
-.js .hero .lede,.js .hero .cta-row{opacity:0;transform:translateY(16px);transition:opacity .7s ease .35s,transform .7s cubic-bezier(.2,.7,.1,1) .35s}
-.js .hero .cta-row{transition-delay:.48s}
-.js .hero-bg{opacity:0;transform:scale(1.06);transition:opacity 1.4s ease,transform 2.2s cubic-bezier(.2,.7,.1,1)}
-.loaded .hero h1 .ln>span{transform:none}
-.loaded .hero .lede,.loaded .hero .cta-row{opacity:1;transform:none}
-.loaded .hero-bg{opacity:1;transform:none}
+/* Video cards orbiting the spinning top (positioned by script) */
+.orbit{position:absolute;inset:0;pointer-events:none}
+.ocard{position:absolute;left:0;top:0;width:var(--cw,84px);aspect-ratio:9/16;margin:calc(var(--cw,84px) * -.889) 0 0 calc(var(--cw,84px) * -.5);border-radius:10px;overflow:hidden;background:var(--sea);box-shadow:0 10px 30px rgba(0,0,0,.35);will-change:transform,opacity;opacity:0}
+.ocard video{display:block;width:100%;height:100%;object-fit:cover}
+@media (max-width:819px){.ocard:nth-child(n+7){display:none}}
+
+/* Hero entrance: everything together, short */
+.js .hero-content{opacity:0;transform:translateY(12px);transition:opacity .45s ease,transform .45s cubic-bezier(.2,.7,.1,1)}
+.loaded .hero-content{opacity:1;transform:none}
 
 /* Marquee */
 .marquee{background:var(--white);border-bottom:1px solid var(--line);overflow:hidden;padding:clamp(18px,3vw,28px) 0}
@@ -113,7 +107,7 @@ header.scrolled{padding:10px 0;box-shadow:0 1px 0 rgba(255,255,255,.08)}
 @keyframes marq{to{transform:translateX(-50%)}}
 
 /* Scroll reveals */
-.js [data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.1,1);transition-delay:calc(var(--i,0) * 90ms)}
+.js [data-reveal]{opacity:0;transform:translateY(12px);transition:opacity .35s ease,transform .35s cubic-bezier(.2,.7,.1,1)}
 .js [data-reveal].in{opacity:1;transform:none}
 
 /* The memorable thing: a 9:16 frame being keyed out */
@@ -130,14 +124,14 @@ header.scrolled{padding:10px 0;box-shadow:0 1px 0 rgba(255,255,255,.08)}
     radial-gradient(110% 60% at 30% 20%,rgba(255,255,255,.32) 0,transparent 60%),
     linear-gradient(175deg,var(--sea) 0,var(--sea) 45%,var(--ink));
   clip-path:inset(100% 0 0 0)}
-.frames.in .scene{animation:key 1.6s cubic-bezier(.7,0,.2,1) .3s forwards}
+.frames.in .scene{animation:key .9s cubic-bezier(.7,0,.2,1) forwards}
 .f-key .person{position:absolute;left:22%;right:22%;bottom:0;height:58%;border-radius:48% 48% 0 0/36% 36% 0 0;background:var(--ink)}
 .f-key .person::before{content:"";position:absolute;left:28%;right:28%;top:-34%;aspect-ratio:1;border-radius:50%;background:var(--ink)}
 .f-key .cap{position:absolute;left:8%;right:8%;top:16%;text-align:center;font-weight:800;font-variation-settings:"wdth" 90;font-size:clamp(.7rem,1.6vw,1.05rem);line-height:1.15;color:#fff;text-shadow:0 2px 0 #000;opacity:0}
-.frames.in .cap,.frames.in .f-key figcaption{animation:fade .4s 1.8s forwards}
+.frames.in .cap,.frames.in .f-key figcaption{animation:fade .25s .8s forwards}
 .f-key figcaption{color:#fff;text-shadow:0 1px 2px #000;opacity:0}
 .f-key .keylabel{position:absolute;left:10px;bottom:10px;font-size:.8rem;font-weight:700;color:var(--white);font-variation-settings:"wdth" 75}
-.frames.in .keylabel{animation:fadeout .3s 1.2s forwards}
+.frames.in .keylabel{animation:fadeout .2s .6s forwards}
 .f-ad{background:var(--ink);border-color:var(--ink);color:var(--white)}
 .f-ad .grid{position:absolute;inset:12px 12px 40px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .f-ad .grid span{border-radius:8px;background:var(--sea);display:grid;place-items:center;font-size:.7rem;font-weight:700;color:var(--white);font-variation-settings:"wdth" 75}
@@ -146,8 +140,7 @@ header.scrolled{padding:10px 0;box-shadow:0 1px 0 rgba(255,255,255,.08)}
 @keyframes fadeout{to{opacity:0}}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
-  .js [data-reveal],.js .hero .lede,.js .hero .cta-row,.js .hero-bg{opacity:1!important;transform:none!important}
-  .js .hero h1 .ln>span{transform:none!important}
+  .js [data-reveal],.js .hero-content{opacity:1!important;transform:none!important}
   .marquee-track{flex-wrap:wrap}
   .f-key .scene{animation:none;clip-path:none}
   .f-key .cap,.f-key figcaption{animation:none;opacity:1}
@@ -203,8 +196,6 @@ details p{color:var(--mute);margin-top:10px}
 
 /* Contact */
 .contact{position:relative;overflow:hidden;background:var(--sea);color:var(--white)}
-.contact-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
-.contact::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,42,63,.6),rgba(11,42,63,.9))}
 .contact .wrap{position:relative;z-index:1}
 .contact h2.display{max-width:14ch;margin-bottom:20px}
 .contact .lede{margin-bottom:32px;color:rgba(255,255,255,.86)}
@@ -213,9 +204,9 @@ details p{color:var(--mute);margin-top:10px}
 .contact :focus-visible{outline-color:var(--white)}
 
 /* Small hover details */
-.btn{transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .2s ease}
+.btn{transition:background-color .15s ease,color .15s ease,border-color .15s ease,transform .1s ease}
 .btn:active{transform:scale(.97)}
-.formats h3{transition:transform .3s cubic-bezier(.2,.7,.1,1)}
+.formats h3{transition:transform .2s ease}
 @media (hover:hover){.formats li:hover h3{transform:translateX(8px)}}
 footer{padding:28px 0 40px;font-size:.9rem;color:var(--mute);border-top:1.5px solid var(--line)}
 footer .wrap{display:grid;gap:20px}
@@ -252,17 +243,21 @@ footer .wrap{display:grid;gap:20px}
 <main id="top">
   <div class="hero">
     <div class="hero-bg" aria-hidden="true">
-      <video class="hero-mobile" data-src="/bg/hero-mobile.mp4" poster="/bg/hero-mobile.jpg" muted loop playsinline preload="none"></video>
-      <div class="wall">
-      <div class="col"><video data-src="/bg/wall-ai-1.mp4" poster="/bg/wall-ai-1.jpg" muted loop playsinline preload="none"></video></div>
-      <div class="col"><video data-src="/bg/wall-ai-4.mp4" poster="/bg/wall-ai-4.jpg" muted loop playsinline preload="none"></video></div>
-      <div class="col"><video data-src="/bg/wall-ai-3.mp4" poster="/bg/wall-ai-3.jpg" muted loop playsinline preload="none"></video></div>
-      <div class="col"><video data-src="/bg/wall-ai-2.mp4" poster="/bg/wall-ai-2.jpg" muted loop playsinline preload="none"></video></div>
+      <video class="hero-video" poster="/bg/hero-mobile.jpg" muted loop playsinline preload="none" data-desktop="/bg/hero-desktop.mp4" data-desktop-poster="/bg/hero-desktop.jpg" data-mobile="/bg/hero-mobile.mp4"></video>
+      <div class="orbit">
+        <div class="ocard"><video data-src="/bg/orbit/o1.mp4" poster="/bg/orbit/o1.jpg" muted loop playsinline preload="none"></video></div>
+        <div class="ocard"><video data-src="/bg/orbit/o2.mp4" poster="/bg/orbit/o2.jpg" muted loop playsinline preload="none"></video></div>
+        <div class="ocard"><video data-src="/bg/orbit/o3.mp4" poster="/bg/orbit/o3.jpg" muted loop playsinline preload="none"></video></div>
+        <div class="ocard"><video data-src="/bg/orbit/o4.mp4" poster="/bg/orbit/o4.jpg" muted loop playsinline preload="none"></video></div>
+        <div class="ocard"><video data-src="/bg/orbit/o5.mp4" poster="/bg/orbit/o5.jpg" muted loop playsinline preload="none"></video></div>
+        <div class="ocard"><video data-src="/bg/orbit/o6.mp4" poster="/bg/orbit/o6.jpg" muted loop playsinline preload="none"></video></div>
+        <div class="ocard"><video data-src="/bg/orbit/o7.mp4" poster="/bg/orbit/o7.jpg" muted loop playsinline preload="none"></video></div>
+        <div class="ocard"><video data-src="/bg/orbit/o8.mp4" poster="/bg/orbit/o8.jpg" muted loop playsinline preload="none"></video></div>
       </div>
       <div class="scrim"></div>
     </div>
     <div class="wrap hero-content">
-      <h1 class="display"><span class="ln"><span>AI video ads,</span></span><span class="ln"><span>scripted to sell.</span></span></h1>
+      <h1 class="display">AI video ads, scripted to sell.</h1>
       <p class="lede">We script from videos that already convert, generate them with AI and review every frame. You get ready-to-run ads for TikTok, Reels and Meta.</p>
       <div class="cta-row">
         <a class="btn btn-key" href="#contact">Contact</a>
@@ -285,10 +280,10 @@ footer .wrap{display:grid;gap:20px}
         <p class="lede">Recent ads for a haircare brand, fully generated with AI. Tap a video to turn the sound on.</p>
       </div>
       <div class="reel">
-        <figure data-reveal style="--i:0"><video src="videos/ai-1.mp4" poster="videos/ai-1.jpg" controls muted loop playsinline preload="metadata"></video><figcaption>Creator tips format</figcaption></figure>
-        <figure data-reveal style="--i:1"><video src="videos/ai-4.mp4" poster="videos/ai-4.jpg" controls muted loop playsinline preload="metadata"></video><figcaption>POV transformation</figcaption></figure>
-        <figure data-reveal style="--i:2"><video src="videos/ai-3.mp4" poster="videos/ai-3.jpg" controls muted loop playsinline preload="metadata"></video><figcaption>Selfie UGC hook</figcaption></figure>
-        <figure data-reveal style="--i:3"><video src="videos/ai-2.mp4" poster="videos/ai-2.jpg" controls muted loop playsinline preload="metadata"></video><figcaption>Podcast clip format</figcaption></figure>
+        <figure data-reveal><video src="videos/ai-1.mp4" poster="videos/ai-1.jpg" controls muted loop playsinline preload="metadata"></video><figcaption>Creator tips format</figcaption></figure>
+        <figure data-reveal><video src="videos/ai-4.mp4" poster="videos/ai-4.jpg" controls muted loop playsinline preload="metadata"></video><figcaption>POV transformation</figcaption></figure>
+        <figure data-reveal><video src="videos/ai-3.mp4" poster="videos/ai-3.jpg" controls muted loop playsinline preload="metadata"></video><figcaption>Selfie UGC hook</figcaption></figure>
+        <figure data-reveal><video src="videos/ai-2.mp4" poster="videos/ai-2.jpg" controls muted loop playsinline preload="metadata"></video><figcaption>Podcast clip format</figcaption></figure>
       </div>
     </div>
   </section>
@@ -300,11 +295,11 @@ footer .wrap{display:grid;gap:20px}
         <p class="lede">Short-form video built for paid social and TikTok Shop, in vertical 9:16.</p>
       </div>
       <ul class="formats">
-        <li data-reveal style="--i:0"><h3>UGC-style ads</h3><p>Someone talking to camera about your product, the way real customers do. Written from the pains and words your buyers actually use.</p></li>
-        <li data-reveal style="--i:1"><h3>Product demos</h3><p>Your product in use, close up, with the result on screen in the first seconds.</p></li>
-        <li data-reveal style="--i:2"><h3>Hook variations</h3><p>One winning body, several openings. Test which first three seconds hold attention without reshooting.</p></li>
-        <li data-reveal style="--i:3"><h3>Voiceover and podcast cuts</h3><p>Narrated explainers and two-person conversation formats for brands that sell on a story.</p></li>
-        <li data-reveal style="--i:4"><h3>Localised versions</h3><p>The same ad adapted for Spain, Italy, Germany or English-speaking markets, in the language and tone of each.</p></li>
+        <li data-reveal><h3>UGC-style ads</h3><p>Someone talking to camera about your product, the way real customers do. Written from the pains and words your buyers actually use.</p></li>
+        <li data-reveal><h3>Product demos</h3><p>Your product in use, close up, with the result on screen in the first seconds.</p></li>
+        <li data-reveal><h3>Hook variations</h3><p>One winning body, several openings. Test which first three seconds hold attention without reshooting.</p></li>
+        <li data-reveal><h3>Voiceover and podcast cuts</h3><p>Narrated explainers and two-person conversation formats for brands that sell on a story.</p></li>
+        <li data-reveal><h3>Localised versions</h3><p>The same ad adapted for Spain, Italy, Germany or English-speaking markets, in the language and tone of each.</p></li>
       </ul>
     </div>
   </section>
@@ -341,10 +336,10 @@ footer .wrap{display:grid;gap:20px}
         </figure>
       </div>
       <ol class="steps">
-        <li data-reveal style="--i:0"><h3>Brief</h3><p>You send the product, the offer and any ads that already work for you. We study your buyers and your competitors.</p></li>
-        <li data-reveal style="--i:1"><h3>Scripts</h3><p>We adapt proven structures from top-selling videos into scripts for your product. You approve them before anything is made.</p></li>
-        <li data-reveal style="--i:2"><h3>Production</h3><p>We generate the footage with AI video tools and refine performance, pacing and the details that make it look real.</p></li>
-        <li data-reveal style="--i:3"><h3>Delivery</h3><p>Final files with captions, ready to upload, plus hook variations for testing. Revisions included.</p></li>
+        <li data-reveal><h3>Brief</h3><p>You send the product, the offer and any ads that already work for you. We study your buyers and your competitors.</p></li>
+        <li data-reveal><h3>Scripts</h3><p>We adapt proven structures from top-selling videos into scripts for your product. You approve them before anything is made.</p></li>
+        <li data-reveal><h3>Production</h3><p>We generate the footage with AI video tools and refine performance, pacing and the details that make it look real.</p></li>
+        <li data-reveal><h3>Delivery</h3><p>Final files with captions, ready to upload, plus hook variations for testing. Revisions included.</p></li>
       </ol>
       </div>
     </div>
@@ -359,9 +354,9 @@ footer .wrap{display:grid;gap:20px}
       <div>
         <blockquote data-reveal>AI makes the footage. Knowing what sells is the part you can’t generate.</blockquote>
         <ul class="facts" style="margin-top:32px">
-          <li data-reveal style="--i:0">Scripts built on structures from videos with proven sales, not guesswork.</li>
-          <li data-reveal style="--i:1">Versions for Spain, Italy, Germany and English-speaking markets.</li>
-          <li data-reveal style="--i:2">One point of contact from brief to delivery.</li>
+          <li data-reveal>Scripts built on structures from videos with proven sales, not guesswork.</li>
+          <li data-reveal>Versions for Spain, Italy, Germany and English-speaking markets.</li>
+          <li data-reveal>One point of contact from brief to delivery.</li>
         </ul>
       </div>
     </div>
@@ -396,7 +391,6 @@ footer .wrap{display:grid;gap:20px}
   </section>
 
   <section class="contact" id="contact">
-    <video class="contact-bg" data-src="/bg/contact-blur.mp4" poster="/bg/contact-blur.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
     <div class="wrap">
       <h2 class="display" data-reveal>Tell us what you sell.</h2>
       <p class="lede">Send us your product and the ads you run today. We reply with script ideas either way.</p>
@@ -433,29 +427,71 @@ footer .wrap{display:grid;gap:20px}
 
   // Hero entrance
   var go=function(){root.classList.add('loaded')};
-  requestAnimationFrame(function(){requestAnimationFrame(go)}); setTimeout(go,120);
+  requestAnimationFrame(go); setTimeout(go,60);
 
   // Header shrinks after scrolling
   var header=document.querySelector('header');
   var onScroll=function(){header.classList.toggle('scrolled',window.scrollY>24)};
   window.addEventListener('scroll',onScroll,{passive:true});onScroll();
 
-  // Background videos: load only the set that fits the screen, play only while visible
-  function load(v){ if(!v.src&&v.dataset.src){ v.src=v.dataset.src; } }
-  function play(v){ load(v); var p=v.play(); if(p&&p.catch)p.catch(function(){}); }
+  // Hero art video: one file per screen size, plays at once, pauses off-screen
+  var hv=document.querySelector('.hero-video');
   var desktop=window.matchMedia('(min-width:820px)');
-  function heroSet(){ return desktop.matches ? document.querySelectorAll('.wall video') : document.querySelectorAll('.hero-mobile'); }
-  var bgObs = hasIO && !lite ? new IntersectionObserver(function(es){
-    es.forEach(function(e){ e.isIntersecting ? play(e.target) : e.target.pause(); });
-  },{rootMargin:'200px 0px'}) : null;
-  function wireHero(){
-    if(!bgObs) return;
-    document.querySelectorAll('.hero-bg video').forEach(function(v){ bgObs.unobserve(v); v.pause(); });
-    heroSet().forEach(function(v){ bgObs.observe(v); });
+  function setHero(){
+    if(!hv) return;
+    if(desktop.matches && hv.dataset.desktopPoster) hv.poster=hv.dataset.desktopPoster;
+    if(lite) return;
+    var want=desktop.matches?hv.dataset.desktop:hv.dataset.mobile;
+    if(hv.getAttribute('src')!==want){ hv.src=want; }
+    var p=hv.play(); if(p&&p.catch)p.catch(function(){});
   }
-  wireHero();
-  if(desktop.addEventListener) desktop.addEventListener('change',wireHero);
-  var cbg=document.querySelector('.contact-bg'); if(bgObs&&cbg) bgObs.observe(cbg);
+  setHero();
+  if(desktop.addEventListener) desktop.addEventListener('change',setHero);
+  if(hv && hasIO && !lite){
+    new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ var p=hv.play(); if(p&&p.catch)p.catch(function(){}); } else hv.pause(); }); }).observe(hv);
+  }
+
+  // Orbit: cards circle the spinning top in the video
+  (function(){
+    var hero=document.querySelector('.hero'), cardsEls=[].slice.call(document.querySelectorAll('.ocard'));
+    if(!hero||!hv||!cardsEls.length) return;
+    var cx=0,cy=0,rx=0,ry=0,running=false,visible=true,t0=performance.now();
+    function layout(){
+      var W=hv.offsetWidth,H=hv.offsetHeight,d=desktop.matches;
+      var sw=d?1280:540, sh=d?720:960, sc=Math.max(W/sw,H/sh);
+      var ox=hv.offsetLeft+(W-sw*sc)/2, oy=hv.offsetTop+(H-sh*sc)/2;
+      cx=ox+(d?.62:.5)*sw*sc; cy=oy+(d?.55:.5)*sh*sc;
+      var topH=(d?.42:.36)*sh*sc;           // on-screen height of the spinning top
+      rx=topH*(d?.75:.95); ry=topH*.2;
+      var cw=Math.round(Math.max(56,Math.min(d?120:86,topH*.36)));
+      hero.style.setProperty('--cw',cw+'px');
+    }
+    function frame(now){
+      if(!running) return;
+      var list=cardsEls.filter(function(c){return c.offsetParent!==null});
+      var n=list.length, a0=(now-t0)/1000*0.32;  // radians per second
+      for(var k=0;k<n;k++){
+        var a=a0+k*2*Math.PI/n, z=Math.sin(a);
+        var x=cx+Math.cos(a)*rx, y=cy+z*ry, s=.62+.38*(z+1)/2;
+        var el=list[k];
+        el.style.transform='translate3d('+x.toFixed(1)+'px,'+y.toFixed(1)+'px,0) scale('+s.toFixed(3)+')';
+        el.style.opacity=(z<0? .35+.35*(1+z) : .7+.3*z).toFixed(2);
+        el.style.zIndex=z<0?1:3;
+      }
+      requestAnimationFrame(frame);
+    }
+    function start(){ if(running) return; running=true; requestAnimationFrame(frame); }
+    function stop(){ running=false; }
+    layout(); window.addEventListener('resize',layout,{passive:true});
+    if(desktop.addEventListener) desktop.addEventListener('change',layout);
+    if(reduce){ running=true; frame(t0); running=false; return; }   // static ring
+    start();
+    if(!lite) cardsEls.forEach(function(c){ var v=c.querySelector('video'); if(c.offsetParent!==null){ v.src=v.dataset.src; var p=v.play(); if(p&&p.catch)p.catch(function(){}); } });
+    if(hasIO) new IntersectionObserver(function(es){ es.forEach(function(e){
+      if(e.isIntersecting){ start(); cardsEls.forEach(function(c){var v=c.querySelector('video'); if(v.src){var p=v.play(); if(p&&p.catch)p.catch(function(){});}}); }
+      else { stop(); cardsEls.forEach(function(c){c.querySelector('video').pause();}); }
+    }); }).observe(hero);
+  })();
 
   // Scroll reveals
   var rev=document.querySelectorAll('[data-reveal]');
