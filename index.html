@@ -149,9 +149,12 @@ header.scrolled{padding:10px 0}
 
 /* Work: real AI videos */
 .work{position:relative;overflow:hidden;isolation:isolate;background:var(--sea);color:var(--white)}
-.work::before{content:"";position:absolute;inset:-20%;z-index:-1;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.0045 .009' numOctaves='4' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 -.32'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E") 0 0/900px 900px repeat;opacity:.42;filter:blur(6px);animation:smoke 60s linear infinite alternate}
-.work::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(60% 50% at 15% 20%,rgba(255,255,255,.07),transparent 70%),radial-gradient(50% 60% at 85% 85%,rgba(0,0,0,.35),transparent 70%)}
-@keyframes smoke{to{transform:translate3d(-6%,4%,0)}}
+.work{background:radial-gradient(60% 50% at 15% 20%,rgba(255,255,255,.06),transparent 70%),radial-gradient(50% 60% at 85% 85%,rgba(0,0,0,.3),transparent 70%),var(--sea)}
+.work::before,.work::after{content:"";position:absolute;inset:-25%;z-index:-1;pointer-events:none;will-change:transform,opacity}
+.work::before{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.0045 .009' numOctaves='4' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 -.32'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E") 0 0/900px 900px repeat;opacity:.38;filter:blur(6px);animation:smokeA 26s ease-in-out infinite alternate}
+.work::after{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.003 .007' numOctaves='4' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 -.32'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E") 0 0/1200px 1200px repeat;opacity:.22;filter:blur(10px);animation:smokeB 34s ease-in-out infinite alternate}
+@keyframes smokeA{0%{transform:translate3d(0,0,0) scale(1);opacity:.32}50%{opacity:.44}100%{transform:translate3d(-9%,5%,0) scale(1.06);opacity:.34}}
+@keyframes smokeB{0%{transform:translate3d(-6%,4%,0) scale(1.05)}100%{transform:translate3d(5%,-5%,0) scale(1)}}
 .work .section-head p{color:rgba(255,255,255,.78)}
 .reel{display:grid;grid-auto-flow:column;grid-auto-columns:min(72vw,300px);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;margin-right:calc(var(--pad) * -1)}
 .reel figure{scroll-snap-align:start}
@@ -260,6 +263,17 @@ footer .wrap{display:grid;gap:20px}
 .brand{display:inline-flex;line-height:0}
 .brand img{height:clamp(30px,5.4vw,40px);width:auto}
 .foot-logo{height:32px;width:auto;margin-bottom:12px}
+
+/* Glass buttons: same colors, frosted with a light rim */
+.btn{position:relative;overflow:hidden;-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%)}
+.btn::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.32) 0%,rgba(255,255,255,.08) 42%,rgba(255,255,255,0) 55%,rgba(255,255,255,.1) 100%)}
+.btn-key,header .btn{background:rgba(11,42,63,.86);border:1px solid rgba(255,255,255,.28);color:var(--white);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),inset 0 -1px 1px rgba(0,0,0,.35),0 8px 22px rgba(11,42,63,.28)}
+.btn-key:hover,header .btn:hover{background:rgba(11,42,63,.96);border-color:rgba(255,255,255,.45);color:var(--white)}
+.hero .btn-key,.contact .btn-key{background:rgba(255,255,255,.86);border:1px solid rgba(255,255,255,.95);color:var(--sea);box-shadow:inset 0 1px 0 #fff,inset 0 -2px 6px rgba(11,42,63,.18),0 10px 28px rgba(0,0,0,.3)}
+.hero .btn-key:hover,.contact .btn-key:hover{background:rgba(255,255,255,.97);color:var(--sea)}
+.hero .btn-ghost{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.45);color:var(--white);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 8px 22px rgba(0,0,0,.2)}
+.hero .btn-ghost:hover{background:rgba(255,255,255,.2);color:var(--white)}
+.cform .btn-ghost{background:rgba(11,42,63,.06);border:1px solid rgba(11,42,63,.2);box-shadow:inset 0 1px 0 #fff}
 </style>
 </head>
 <body>
