@@ -133,7 +133,7 @@ header.scrolled{padding:10px 0}
 .frames.in .keylabel{animation:fadeout .2s .6s forwards}
 .f-ad{background:var(--ink);border-color:var(--ink);color:var(--white)}
 .f-ad .grid{position:absolute;inset:12px 12px 40px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.f-ad .grid span{border-radius:8px;background:var(--sea);display:grid;place-items:center;font-size:.7rem;font-weight:700;color:var(--white);font-variation-settings:"wdth" 75}
+.f-ad .grid span{background-color:var(--sea);background-size:cover;background-position:center;position:relative;overflow:hidden;border-radius:8px;display:grid;align-items:end;justify-items:start;font-size:.7rem;font-weight:700;color:var(--white);font-variation-settings:"wdth" 75}
 @keyframes key{to{clip-path:inset(0 0 0 0)}}
 @keyframes fade{to{opacity:1}}
 @keyframes fadeout{to{opacity:0}}
@@ -180,7 +180,9 @@ section{padding:clamp(56px,9vw,112px) 0}
 /* Process: a real sequence, so it's numbered */
 .steps{list-style:none;padding:0;counter-reset:s;display:grid;gap:28px}
 .steps li{counter-increment:s;display:grid;grid-template-columns:auto 1fr;gap:4px 18px}
-.steps li::before{content:counter(s);grid-row:span 2;font-variation-settings:"wdth" 125;font-weight:800;font-size:2.4rem;line-height:1;color:var(--ink);min-width:1.4ch}
+.steps li{align-items:start}
+.step-icon{grid-row:span 2;width:56px;height:auto;filter:drop-shadow(0 6px 14px rgba(11,42,63,.25))}
+@media (min-width:820px){.step-icon{width:64px}}
 .steps p{color:var(--mute)}
 
 /* Creator */
@@ -276,6 +278,8 @@ footer .wrap{display:grid;gap:20px}
 .hero .btn-ghost{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.45);color:var(--white);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 8px 22px rgba(0,0,0,.2)}
 .hero .btn-ghost:hover{background:rgba(255,255,255,.2);color:var(--white)}
 .cform .btn-ghost{background:rgba(11,42,63,.06);border:1px solid rgba(11,42,63,.2);box-shadow:inset 0 1px 0 #fff}
+.f-key .shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.f-ad .grid span b{white-space:nowrap;margin:3px;padding:1px 6px;line-height:1.5;border-radius:999px;background:rgba(0,0,0,.55);color:#fff;font-size:clamp(.5rem,1.6vw,.66rem);font-weight:700;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 </style>
 </head>
 <body>
@@ -373,24 +377,23 @@ footer .wrap{display:grid;gap:20px}
         </figure>
         <figure class="frame f-key">
           <div class="scene" aria-hidden="true">
-            <div class="person"></div>
+            <img class="shot" src="/img/process/generated-shot.webp" alt="" width="332" height="285" loading="lazy" decoding="async">
           </div>
-          <div class="cap" aria-hidden="true">I stopped buying this for one reason…</div>
           <span class="keylabel" aria-hidden="true">Generating</span>
           <figcaption>Generated shot</figcaption>
         </figure>
         <figure class="frame f-ad">
           <div class="grid" aria-hidden="true">
-            <span>Hook A</span><span>Hook B</span><span>Hook C</span><span>Hook D</span>
+            <span style="background-image:url(/img/process/hook-a.webp)"><b>Hook A</b></span><span style="background-image:url(/img/process/hook-b.webp)"><b>Hook B</b></span><span style="background-image:url(/img/process/hook-c.webp)"><b>Hook C</b></span><span style="background-image:url(/img/process/hook-d.webp)"><b>Hook D</b></span>
           </div>
           <figcaption>4 hooks</figcaption>
         </figure>
       </div>
       <ol class="steps">
-        <li data-reveal><h3>Brief</h3><p>You send the product, the offer and any ads that already work for you. We study your buyers and your competitors.</p></li>
-        <li data-reveal><h3>Scripts</h3><p>We adapt proven structures from top-selling videos into scripts for your product. You approve them before anything is made.</p></li>
-        <li data-reveal><h3>Production</h3><p>We generate the footage with AI video tools and refine performance, pacing and the details that make it look real.</p></li>
-        <li data-reveal><h3>Delivery</h3><p>Final files with captions, ready to upload, plus hook variations for testing. Revisions included.</p></li>
+        <li data-reveal><img class="step-icon" src="/img/process/icon-brief.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><h3>Brief</h3><p>You send the product, the offer and any ads that already work for you. We study your buyers and your competitors.</p></li>
+        <li data-reveal><img class="step-icon" src="/img/process/icon-scripts.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><h3>Scripts</h3><p>We adapt proven structures from top-selling videos into scripts for your product. You approve them before anything is made.</p></li>
+        <li data-reveal><img class="step-icon" src="/img/process/icon-production.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><h3>Production</h3><p>We generate the footage with AI video tools and refine performance, pacing and the details that make it look real.</p></li>
+        <li data-reveal><img class="step-icon" src="/img/process/icon-delivery.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><h3>Delivery</h3><p>Final files with captions, ready to upload, plus hook variations for testing. Revisions included.</p></li>
       </ol>
       </div>
     </div>
