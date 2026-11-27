@@ -207,12 +207,12 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     <div class="wrap">
       <div class="section-head">
         <h2 class="display">Made with AI. Made to sell.</h2>
-        <p class="lede">Recent ads for a haircare brand, fully generated with AI. Tap to play with sound.</p>
+        <p class="lede">Recent ads for a haircare brand, fully generated with AI. Tap a video to turn the sound on.</p>
       </div>
       <div class="reel">
-        <figure><video src="videos/ai-1.mp4" poster="videos/ai-1.jpg" controls playsinline preload="none"></video><figcaption>Creator tips format</figcaption></figure>
-        <figure><video src="videos/ai-2.mp4" poster="videos/ai-2.jpg" controls playsinline preload="none"></video><figcaption>Podcast clip format</figcaption></figure>
-        <figure><video src="videos/ai-3.mp4" poster="videos/ai-3.jpg" controls playsinline preload="none"></video><figcaption>Selfie UGC hook</figcaption></figure>
+        <figure><video src="videos/ai-1.mp4" poster="videos/ai-1.jpg" controls muted loop playsinline preload="metadata"></video><figcaption>Creator tips format</figcaption></figure>
+        <figure><video src="videos/ai-2.mp4" poster="videos/ai-2.jpg" controls muted loop playsinline preload="metadata"></video><figcaption>Podcast clip format</figcaption></figure>
+        <figure><video src="videos/ai-3.mp4" poster="videos/ai-3.jpg" controls muted loop playsinline preload="metadata"></video><figcaption>Selfie UGC hook</figcaption></figure>
       </div>
     </div>
   </section>
@@ -310,5 +310,26 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   </div>
 </footer>
 
+<script>
+(function(){
+  var vids=document.querySelectorAll('.reel video');
+  if(!('IntersectionObserver' in window)) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      var v=e.target;
+      if(e.isIntersecting){ v.play().catch(function(){}); }
+      else if(!v.paused){ v.pause(); }
+    });
+  },{threshold:0.6});
+  vids.forEach(function(v){
+    io.observe(v);
+    // first tap on a muted autoplaying video turns the sound on instead of pausing it
+    v.addEventListener('click',function(ev){
+      if(v.muted && !v.paused){ ev.preventDefault(); v.muted=false; }
+    });
+  });
+})();
+</script>
 </body>
 </html>
