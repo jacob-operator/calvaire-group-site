@@ -67,8 +67,8 @@ header.scrolled{padding:10px 0}
 /* Hero with one art video */
 .hero{position:relative;overflow:hidden;background:var(--sea);color:var(--white);min-height:calc(100svh - 76px);display:flex;align-items:flex-end;padding:clamp(56px,10vw,120px) 0 clamp(40px,8vw,96px)}
 .hero-bg{position:absolute;inset:0;z-index:0}
-.hero-video{position:absolute;left:0;top:0;width:100%;height:58%;object-fit:cover;object-position:50% 50%;background:var(--sea)}
-.scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,42,63,0) 0%,rgba(11,42,63,0) 42%,var(--sea) 60%)}
+.hero-video{position:absolute;left:0;top:0;width:100%;height:54%;object-fit:cover;object-position:50% 30%;background:var(--sea)}
+.scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,42,63,0) 0%,rgba(11,42,63,0) 40%,var(--sea) 56%)}
 .hero-content{position:relative;z-index:1;width:100%}
 .hero h1{margin-bottom:20px;max-width:12ch}
 .hero .lede{margin-bottom:28px;color:rgba(255,255,255,.86)}
@@ -80,7 +80,7 @@ header.scrolled{padding:10px 0}
 .cta-row{display:flex;flex-wrap:wrap;gap:12px}
 @media (min-width:820px){
   .hero{align-items:center;min-height:min(calc(100svh - 76px),900px)}
-  .hero-video{height:100%}
+  .hero-video{height:100%;object-position:50% 50%}
   .scrim{background:linear-gradient(90deg,rgba(11,42,63,.95) 0%,rgba(11,42,63,.7) 38%,rgba(11,42,63,0) 65%)}
   .hero h1.display{font-size:clamp(2.6rem,5.2vw,5.2rem);max-width:10ch}
   .hero .lede{max-width:36ch}
@@ -148,7 +148,10 @@ header.scrolled{padding:10px 0}
 
 
 /* Work: real AI videos */
-.work{background:var(--sea);color:var(--white)}
+.work{position:relative;overflow:hidden;isolation:isolate;background:var(--sea);color:var(--white)}
+.work::before{content:"";position:absolute;inset:-20%;z-index:-1;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.0045 .009' numOctaves='4' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 -.32'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E") 0 0/900px 900px repeat;opacity:.42;filter:blur(6px);animation:smoke 60s linear infinite alternate}
+.work::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(60% 50% at 15% 20%,rgba(255,255,255,.07),transparent 70%),radial-gradient(50% 60% at 85% 85%,rgba(0,0,0,.35),transparent 70%)}
+@keyframes smoke{to{transform:translate3d(-6%,4%,0)}}
 .work .section-head p{color:rgba(255,255,255,.78)}
 .reel{display:grid;grid-auto-flow:column;grid-auto-columns:min(72vw,300px);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;margin-right:calc(var(--pad) * -1)}
 .reel figure{scroll-snap-align:start}
@@ -202,6 +205,35 @@ details p{color:var(--mute);margin-top:10px}
 .contact .btn-key:hover{background:transparent;color:var(--white)}
 .contact :focus-visible{outline-color:var(--white)}
 
+
+/* Contact form popup */
+.cform{border:0;padding:0;margin:auto;width:min(560px,100%);max-height:100%;border-radius:20px;background:var(--white);color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.cform::backdrop{background:rgba(11,42,63,.72)}
+.cform[open]{animation:pop .18s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(10px)}}
+.cform-in{padding:clamp(22px,5vw,36px);display:grid;gap:16px}
+.cform-top{display:flex;justify-content:space-between;align-items:start;gap:16px}
+.cform h2{font-variation-settings:"wdth" 125;font-weight:800;font-size:clamp(1.6rem,5vw,2.1rem);letter-spacing:-.02em;line-height:1}
+.cform-x{flex-shrink:0;width:44px;height:44px;border-radius:50%;border:0;background:var(--gray);font-size:1.4rem;line-height:1;cursor:pointer;color:var(--ink)}
+.cform-x:hover{background:var(--ink);color:var(--white)}
+.cform p.hint{color:var(--mute);font-size:.95rem}
+.field{display:grid;gap:6px}
+.field label{font-weight:700;font-size:.95rem}
+.field input,.field select,.field textarea{font:inherit;font-size:16px;width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:12px;background:var(--white);color:var(--ink);transition:border-color .12s}
+.field textarea{min-height:110px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--sea);box-shadow:0 0 0 3px rgba(11,42,63,.15)}
+.row2{display:grid;gap:16px}
+@media (min-width:560px){.row2{grid-template-columns:1fr 1fr}}
+.cform .btn-key{width:100%;min-height:52px;font-size:1.05rem;cursor:pointer;font-family:inherit}
+.cform-done{display:none;text-align:left;gap:12px}
+.cform.sent .cform-form{display:none}
+.cform.sent .cform-done{display:grid}
+@media (max-width:559px){
+  .cform{margin:auto 0 0;width:100%;max-width:100%;border-radius:20px 20px 0 0;max-height:92svh}
+  .cform[open]{animation:sheet .2s ease-out}
+  @keyframes sheet{from{transform:translateY(40px);opacity:0}}
+}
+
 /* Small hover details */
 .btn{transition:background-color .15s ease,color .15s ease,border-color .15s ease,transform .1s ease}
 .btn:active{transform:scale(.97)}
@@ -235,7 +267,7 @@ footer .wrap{display:grid;gap:20px}
 <header>
   <div class="wrap">
     <a class="brand" href="#top"><img src="/img/logo-black.webp" alt="Calvaire Group" width="1872" height="258"></a>
-    <a class="btn btn-ghost" href="#contact">Contact</a>
+    <a class="btn btn-ghost" href="#contact" data-open-form>Contact</a>
   </div>
 </header>
 
@@ -259,7 +291,7 @@ footer .wrap{display:grid;gap:20px}
       <h1 class="display">AI video ads, scripted to sell.</h1>
       <p class="lede">We script from videos that already convert, generate them with AI and review every frame. You get ready-to-run ads for TikTok, Reels and Meta.</p>
       <div class="cta-row">
-        <a class="btn btn-key" href="#contact">Contact</a>
+        <a class="btn btn-key" href="#contact" data-open-form>Contact</a>
         <a class="btn btn-ghost" href="#work">See our work</a>
       </div>
     </div>
@@ -394,11 +426,49 @@ footer .wrap{display:grid;gap:20px}
       <h2 class="display" data-reveal>Tell us what you sell.</h2>
       <p class="lede">Send us your product and the ads you run today. We reply with script ideas either way.</p>
       <div class="cta-row">
-        <a class="btn btn-key" href="mailto:info@calvairegroup.com?subject=AI%20video%20ads">Contact</a>
+        <a class="btn btn-key" href="mailto:info@calvairegroup.com?subject=AI%20video%20ads" data-open-form>Contact</a>
       </div>
     </div>
   </section>
 </main>
+
+<dialog class="cform" id="cform" aria-labelledby="cform-title">
+  <div class="cform-in">
+    <div class="cform-top">
+      <h2 id="cform-title">Tell us about your brand</h2>
+      <button class="cform-x" type="button" data-close aria-label="Close">×</button>
+    </div>
+    <form class="cform-form" novalidate>
+      <div class="cform-in" style="padding:0">
+        <p class="hint">We reply within one business day.</p>
+        <div class="row2">
+          <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="f-web">Website</label><input id="f-web" name="website" type="url" inputmode="url" autocomplete="url" placeholder="yourbrand.com"></div>
+          <div class="field"><label for="f-rev">Annual revenue (approx.)</label>
+            <select id="f-rev" name="revenue">
+              <option value="">Select</option>
+              <option>Under €100K</option>
+              <option>€100K – €500K</option>
+              <option>€500K – €1M</option>
+              <option>€1M – €5M</option>
+              <option>More than €5M</option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label for="f-msg">Message</label><textarea id="f-msg" name="message" placeholder="What do you sell, and what ads do you run today?"></textarea></div>
+        <button class="btn btn-key" type="submit">Send message</button>
+      </div>
+    </form>
+    <div class="cform-done" role="status">
+      <p class="lede" style="color:var(--ink)">Your email app should now open with your message ready. Press send there and we'll reply within one business day.</p>
+      <p class="hint">Nothing opened? Email us at <a href="mailto:info@calvairegroup.com">info@calvairegroup.com</a>.</p>
+      <button class="btn btn-ghost" type="button" data-close>Close</button>
+    </div>
+  </div>
+</dialog>
 
 <footer>
   <div class="wrap">
@@ -458,11 +528,11 @@ footer .wrap{display:grid;gap:20px}
     function layout(){
       var W=hv.offsetWidth,H=hv.offsetHeight,d=desktop.matches;
       var sw=d?1280:540, sh=d?720:960, sc=Math.max(W/sw,H/sh);
-      var ox=hv.offsetLeft+(W-sw*sc)/2, oy=hv.offsetTop+(H-sh*sc)/2;
+      var ox=hv.offsetLeft+(W-sw*sc)/2, oy=hv.offsetTop+(H-sh*sc)*(d?.5:.3);
       cx=ox+(d?.62:.5)*sw*sc; cy=oy+(d?.55:.5)*sh*sc;
       var topH=(d?.42:.36)*sh*sc;           // on-screen height of the spinning top
       rx=topH*(d?.75:.95); ry=topH*.2;
-      var cw=Math.round(Math.max(56,Math.min(d?120:86,topH*.36)));
+      var cw=Math.round(Math.max(52,Math.min(d?120:70,topH*.32)));
       hero.style.setProperty('--cw',cw+'px');
     }
     function frame(now){
@@ -490,6 +560,27 @@ footer .wrap{display:grid;gap:20px}
       if(e.isIntersecting){ start(); cardsEls.forEach(function(c){var v=c.querySelector('video'); if(v.src){var p=v.play(); if(p&&p.catch)p.catch(function(){});}}); }
       else { stop(); cardsEls.forEach(function(c){c.querySelector('video').pause();}); }
     }); }).observe(hero);
+  })();
+
+
+  // Contact form popup: opens instantly, sends through the visitor's email app
+  (function(){
+    var d=document.getElementById('cform'); if(!d||typeof d.showModal!=='function') return;
+    var f=d.querySelector('form'); var el=function(n){return f.elements.namedItem(n)};
+    document.querySelectorAll('[data-open-form]').forEach(function(a){
+      a.addEventListener('click',function(e){ e.preventDefault(); d.classList.remove('sent'); d.showModal(); setTimeout(function(){ if(window.matchMedia('(hover:hover)').matches) d.querySelector('#f-name').focus(); },0); });
+    });
+    d.querySelectorAll('[data-close]').forEach(function(b){ b.addEventListener('click',function(){ d.close(); }); });
+    d.addEventListener('click',function(e){ if(e.target===d) d.close(); });
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      var name=el("name").value.trim(), email=el("email").value.trim();
+      if(!name){ el("name").focus(); el("name").reportValidity&&el("name").setCustomValidity('Add your name'); el("name").reportValidity(); el("name").setCustomValidity(''); return; }
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ el("email").setCustomValidity('Add a valid email'); el("email").reportValidity(); el("email").setCustomValidity(''); return; }
+      var body='Name: '+name+'\nEmail: '+email+'\nWebsite: '+(el("website").value.trim()||'-')+'\nAnnual revenue: '+(el("revenue").value||'-')+'\n\n'+el("message").value.trim();
+      window.location.href='mailto:info@calvairegroup.com?subject='+encodeURIComponent('AI video ads — '+name)+'&body='+encodeURIComponent(body);
+      d.classList.add('sent');
+    });
   })();
 
   // Scroll reveals
