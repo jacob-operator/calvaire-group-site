@@ -38,7 +38,11 @@ p{max-width:var(--measure)}
 .lede{font-size:clamp(1.125rem,2vw,1.375rem);color:var(--mute);max-width:44ch}
 
 /* Header */
-header{padding:22px 0}
+header{padding:18px 0;background:var(--sea);color:var(--white)}
+header .btn{border-color:var(--white);color:var(--white)}
+header .btn-ghost:hover{background:var(--white);color:var(--sea)}
+header :focus-visible{outline-color:var(--white)}
+.hero{background:var(--white)}
 header .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px}
 .brand{font-variation-settings:"wdth" 125;font-weight:800;font-size:1.125rem;letter-spacing:-.01em;text-decoration:none}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:999px;font-weight:700;text-decoration:none;border:2px solid var(--ink)}
@@ -58,10 +62,10 @@ header .btn{min-height:42px;padding:0 18px;font-size:.95rem}
 .frames{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,2vw,20px);align-items:end}
 .frame{position:relative;aspect-ratio:9/16;border-radius:18px;overflow:hidden;background:var(--gray);border:1.5px solid var(--line)}
 .frame figcaption{position:absolute;left:10px;right:10px;bottom:10px;font-size:.8rem;font-weight:600;font-variation-settings:"wdth" 75}
-.f-script{padding:14px;transform:translateY(-6%)}
+.f-script{padding:14px}
 .f-script .lines{max-height:calc(100% - 34px);overflow:hidden;font-variation-settings:"wdth" 75;font-size:clamp(.62rem,1.3vw,.85rem);line-height:1.35;color:var(--mute)}
 .f-script .lines b{color:var(--ink);display:block;margin-top:.5em}
-.f-key{background:var(--sea);border-color:var(--sea);transform:translateY(-14%)}
+.f-key{background:var(--sea);border-color:var(--sea)}
 .f-key .scene{position:absolute;inset:0;
   background:
     radial-gradient(110% 60% at 30% 20%,rgba(255,255,255,.32) 0,transparent 60%),
@@ -83,6 +87,16 @@ header .btn{min-height:42px;padding:0 18px;font-size:.95rem}
   .f-key .cap,.f-key figcaption{animation:none;opacity:1}
   .f-key .keylabel{display:none}
 }
+
+
+/* Work: real AI videos */
+.work{background:var(--sea);color:var(--white)}
+.work .section-head p{color:rgba(255,255,255,.78)}
+.reel{display:grid;grid-auto-flow:column;grid-auto-columns:min(72vw,300px);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;margin-right:calc(var(--pad) * -1)}
+.reel figure{scroll-snap-align:start}
+.reel video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:18px;background:var(--ink)}
+.reel figcaption{margin-top:10px;font-size:.95rem;color:rgba(255,255,255,.78)}
+@media (min-width:820px){.reel{grid-auto-flow:row;grid-template-columns:repeat(3,1fr);grid-auto-columns:auto;overflow:visible;margin-right:0}}
 
 /* Sections */
 section{padding:clamp(56px,9vw,112px) 0}
@@ -128,6 +142,8 @@ footer{padding:28px 0 40px;font-size:.9rem;color:var(--mute);border-top:1.5px so
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
 @media (min-width:820px){
+  .f-script{transform:translateY(-6%)}
+  .f-key{transform:translateY(-14%)}
   .hero-grid{grid-template-columns:1.15fr 1fr;align-items:center}
   .formats li{grid-template-columns:minmax(220px,1fr) 1.6fr;align-items:baseline}
   .steps{grid-template-columns:repeat(2,1fr);gap:40px 56px}
@@ -155,7 +171,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
         <p class="lede">We script from videos that already convert, generate them with AI, and our in-house creator directs every frame. You get ready-to-run ads for TikTok, Reels and Meta.</p>
         <div class="cta-row">
           <a class="btn btn-key" href="#contact">Book a call</a>
-          <a class="btn btn-ghost" href="#formats">See what we make</a>
+          <a class="btn btn-ghost" href="#work">See our work</a>
         </div>
       </div>
 
@@ -186,6 +202,20 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
       </div>
     </div>
   </div>
+
+  <section class="work" id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="display">Made with AI. Made to sell.</h2>
+        <p class="lede">Recent ads for a haircare brand, fully generated with AI and directed in-house. Tap to play with sound.</p>
+      </div>
+      <div class="reel">
+        <figure><video src="videos/ai-1.mp4" poster="videos/ai-1.jpg" controls playsinline preload="none"></video><figcaption>Creator tips format</figcaption></figure>
+        <figure><video src="videos/ai-2.mp4" poster="videos/ai-2.jpg" controls playsinline preload="none"></video><figcaption>Podcast clip format</figcaption></figure>
+        <figure><video src="videos/ai-3.mp4" poster="videos/ai-3.jpg" controls playsinline preload="none"></video><figcaption>Selfie UGC hook</figcaption></figure>
+      </div>
+    </div>
+  </section>
 
   <section class="band" id="formats">
     <div class="wrap">
