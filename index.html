@@ -67,6 +67,7 @@ header.scrolled{padding:10px 0}
 /* Hero with one art video */
 .hero{position:relative;overflow:hidden;background:var(--sea);color:var(--white);min-height:calc(100svh - 76px);display:flex;align-items:flex-end;padding:clamp(56px,10vw,120px) 0 clamp(40px,8vw,96px)}
 .hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(38% 55% at var(--lx,50%) 0%,rgba(140,205,235,.22),transparent 72%),radial-gradient(60% 30% at var(--lx,50%) var(--fy,52%),rgba(140,205,235,.10),transparent 70%),linear-gradient(180deg,#0f3753 0%,#0B2A3F 45%,#061a28 100%)}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.95}
 .hero-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,42,63,0) 0%,rgba(11,42,63,0) 40%,var(--sea) 56%)}
 .hero-content{position:relative;z-index:1;width:100%}
@@ -81,6 +82,7 @@ header.scrolled{padding:10px 0}
 @media (min-width:820px){
   .hero{align-items:center;min-height:min(calc(100svh - 76px),900px)}
   .scrim{background:linear-gradient(90deg,rgba(11,42,63,.95) 0%,rgba(11,42,63,.7) 38%,rgba(11,42,63,0) 65%)}
+  .hero-video{transform:scaleX(-1)}
   .hero h1.display{font-size:clamp(2.6rem,5.2vw,5.2rem);max-width:10ch}
   .hero .lede{max-width:36ch}
 }
@@ -320,6 +322,7 @@ footer .wrap{display:grid;gap:20px}
 <main id="top">
   <div class="hero">
     <div class="hero-bg" aria-hidden="true">
+      <video class="hero-video" poster="/bg/glass-mobile.jpg" muted loop playsinline preload="none" data-desktop="/bg/glass-desktop.mp4" data-desktop-poster="/bg/glass-desktop.jpg" data-mobile="/bg/glass-mobile.mp4"></video>
       <canvas class="hero-canvas"></canvas>
       <div class="orbit">
         <div class="ocard"><video data-src="/bg/orbit/o1.mp4" poster="/bg/orbit/o1.jpg" muted loop playsinline preload="none"></video></div>
@@ -558,6 +561,19 @@ footer .wrap{display:grid;gap:20px}
   var desktop=window.matchMedia('(min-width:820px)');
   var heroEl=document.querySelector('.hero'), cv=document.querySelector('.hero-canvas');
   var topGeo={cx:0,cy:0,w:0,h:0};
+  // Glass background video: one file per screen size, pauses off-screen
+  var hv=document.querySelector('.hero-video');
+  function setHero(){
+    if(!hv) return;
+    if(desktop.matches && hv.dataset.desktopPoster) hv.poster=hv.dataset.desktopPoster;
+    if(lite) return;
+    var want=desktop.matches?hv.dataset.desktop:hv.dataset.mobile;
+    if(hv.getAttribute('src')!==want) hv.src=want;
+    var p=hv.play(); if(p&&p.catch)p.catch(function(){});
+  }
+  setHero();
+  if(desktop.addEventListener) desktop.addEventListener('change',setHero);
+  if(hv && hasIO && !lite) new IntersectionObserver(function(es){ if(es[0].isIntersecting){ var p=hv.play(); if(p&&p.catch)p.catch(function(){}); } else hv.pause(); }).observe(hv);
   (function(){
     if(!cv||!heroEl) return;
     var ctx=cv.getContext('2d'), W=0,H=0,dpr=1, run=false, vis=true;
@@ -620,15 +636,6 @@ footer .wrap{display:grid;gap:20px}
     function frame(now){
       var tm=now/1000, d=desktop.matches;
       ctx.clearRect(0,0,W,H);
-      // light rays from above
-      ctx.save(); ctx.globalCompositeOperation='lighter';
-      for(var k=0;k<5;k++){
-        var x=topGeo.cx+(k-2)*topGeo.w*.32+Math.sin(tm*.3+k)*8, a=.035+.025*Math.sin(tm*.5+k*1.7);
-        var gr=ctx.createLinearGradient(0,0,0,topGeo.cy+topGeo.h);
-        gr.addColorStop(0,'rgba(150,210,240,'+a+')'); gr.addColorStop(1,'rgba(150,210,240,0)');
-        ctx.fillStyle=gr; ctx.beginPath(); ctx.moveTo(x-topGeo.w*.05,0); ctx.lineTo(x+topGeo.w*.05,0); ctx.lineTo(x+topGeo.w*.22,topGeo.cy+topGeo.h); ctx.lineTo(x-topGeo.w*.22,topGeo.cy+topGeo.h); ctx.fill();
-      }
-      ctx.restore();
       // floor glow under the tip
       var fy=topGeo.cy+topGeo.h, fg=ctx.createRadialGradient(topGeo.cx,fy,0,topGeo.cx,fy,topGeo.w*.9);
       fg.addColorStop(0,'rgba(255,255,255,.35)'); fg.addColorStop(.15,'rgba(170,215,240,.12)'); fg.addColorStop(1,'rgba(170,215,240,0)');
