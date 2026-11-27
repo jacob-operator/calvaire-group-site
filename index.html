@@ -280,6 +280,33 @@ footer .wrap{display:grid;gap:20px}
 .cform .btn-ghost{background:rgba(11,42,63,.06);border:1px solid rgba(11,42,63,.2);box-shadow:inset 0 1px 0 #fff}
 .f-key .shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .f-ad .grid span b{white-space:nowrap;margin:3px;padding:1px 6px;line-height:1.5;border-radius:999px;background:rgba(0,0,0,.55);color:#fff;font-size:clamp(.5rem,1.6vw,.66rem);font-weight:700;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+
+/* How it works: built around the glass step icons */
+.process{position:relative;background:radial-gradient(80% 60% at 80% 0%,rgba(120,200,230,.10),transparent 60%),radial-gradient(70% 60% at 0% 100%,rgba(0,0,0,.35),transparent 70%),var(--sea);color:var(--white)}
+.process .section-head p{color:rgba(255,255,255,.78)}
+.pcards{list-style:none;padding:0;display:grid;gap:18px}
+.pcard{position:relative;display:flex;flex-direction:column;gap:10px;padding:clamp(20px,3vw,28px);border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 20px 40px rgba(0,0,0,.25);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.pc-icon{width:72px;height:auto;margin:-4px 0 6px -6px;filter:drop-shadow(0 10px 18px rgba(0,0,0,.35))}
+.pcard h3{font-variation-settings:"wdth" 112;font-size:1.4rem}
+.pcard p{color:rgba(255,255,255,.78);margin-bottom:6px}
+.pvis{margin-top:auto;border-radius:14px}
+.chips{list-style:none;padding:0;margin-top:auto;display:flex;flex-wrap:wrap;gap:8px}
+.chips li{padding:7px 12px;border-radius:999px;font-size:.88rem;font-weight:600;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.15)}
+.script{display:grid;gap:8px;padding:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.1);font-size:.9rem}
+.script div{display:grid;grid-template-columns:72px 1fr;gap:10px}
+.script b{color:var(--white)}
+.script span{color:rgba(255,255,255,.72)}
+.shot{display:block;width:100%;height:auto;aspect-ratio:332/285;object-fit:cover;border:1px solid rgba(255,255,255,.12)}
+.hooks{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.hooks figure{position:relative}
+.hooks img{display:block;width:100%;height:auto;aspect-ratio:214/114;object-fit:cover;border-radius:10px;border:1px solid rgba(255,255,255,.12)}
+.hooks figcaption{position:absolute;left:6px;bottom:6px;padding:2px 8px;border-radius:999px;font-size:.72rem;font-weight:700;background:rgba(0,0,0,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+@media (min-width:700px){.pcards{grid-template-columns:1fr 1fr;gap:22px}}
+@media (min-width:1100px){.pcards{gap:26px}.pcard{padding:32px}.hooks{gap:10px}}
+.creator{background:var(--gray)!important;color:var(--ink)!important}
+.creator .section-head p{color:var(--mute)!important}
+.creator .facts li{color:rgba(0,0,0,.78)!important}
+.creator .facts li::before{background:var(--sea)!important}
 </style>
 </head>
 <body>
@@ -359,43 +386,45 @@ footer .wrap{display:grid;gap:20px}
     </div>
   </section>
 
-  <section id="process">
+  <section class="process" id="process">
     <div class="wrap">
       <div class="section-head" data-reveal>
         <h2 class="display">How it works</h2>
+        <p class="lede">Four steps from your product to ads ready to run.</p>
       </div>
-      <div class="process-grid">
-      <div class="frames" data-reveal aria-label="From script to finished ad">
-        <figure class="frame f-script">
-          <div class="lines" aria-hidden="true">
-            <b>Hook</b>“I stopped buying this for one reason…”
-            <b>Problem</b>Close-up, product in hand.
-            <b>Proof</b>Before / after, 3 sec.
-            <b>CTA</b>Link in bio.
+      <ol class="pcards">
+        <li class="pcard" data-reveal>
+          <img class="pc-icon" src="/img/process/icon-brief.webp" alt="" width="128" height="131" loading="lazy" decoding="async">
+          <h3>Brief</h3>
+          <p>You send the product, the offer and any ads that already work for you. We study your buyers and your competitors.</p>
+          <ul class="chips" aria-label="What we ask for"><li>Product</li><li>Offer</li><li>Best ads</li><li>Competitors</li></ul>
+        </li>
+        <li class="pcard" data-reveal>
+          <img class="pc-icon" src="/img/process/icon-scripts.webp" alt="" width="128" height="131" loading="lazy" decoding="async">
+          <h3>Scripts</h3>
+          <p>We adapt proven structures from top-selling videos into scripts for your product. You approve them before anything is made.</p>
+          <div class="pvis script" aria-hidden="true">
+            <div><b>Hook</b><span>“I stopped buying this for one reason…”</span></div>
+            <div><b>Problem</b><span>Close-up, product in hand.</span></div>
+            <div><b>Proof</b><span>Before and after, 3 seconds.</span></div>
+            <div><b>CTA</b><span>Link in bio.</span></div>
           </div>
-          <figcaption>Script</figcaption>
-        </figure>
-        <figure class="frame f-key">
-          <div class="scene" aria-hidden="true">
-            <img class="shot" src="/img/process/generated-shot.webp" alt="" width="332" height="285" loading="lazy" decoding="async">
+        </li>
+        <li class="pcard" data-reveal>
+          <img class="pc-icon" src="/img/process/icon-production.webp" alt="" width="128" height="131" loading="lazy" decoding="async">
+          <h3>Production</h3>
+          <p>We generate the footage with AI video tools and refine performance, pacing and the details that make it look real.</p>
+          <img class="pvis shot" src="/img/process/generated-shot.webp" alt="AI-generated shot of a woman holding a skincare bottle" width="332" height="285" loading="lazy" decoding="async">
+        </li>
+        <li class="pcard" data-reveal>
+          <img class="pc-icon" src="/img/process/icon-delivery.webp" alt="" width="128" height="131" loading="lazy" decoding="async">
+          <h3>Delivery</h3>
+          <p>Final files with captions, ready to upload, plus hook variations for testing. Revisions included.</p>
+          <div class="pvis hooks">
+            <figure><img src="/img/process/hook-a.webp" alt="" width="214" height="114" loading="lazy" decoding="async"><figcaption>Hook A</figcaption></figure><figure><img src="/img/process/hook-b.webp" alt="" width="214" height="114" loading="lazy" decoding="async"><figcaption>Hook B</figcaption></figure><figure><img src="/img/process/hook-c.webp" alt="" width="214" height="114" loading="lazy" decoding="async"><figcaption>Hook C</figcaption></figure><figure><img src="/img/process/hook-d.webp" alt="" width="214" height="114" loading="lazy" decoding="async"><figcaption>Hook D</figcaption></figure>
           </div>
-          <span class="keylabel" aria-hidden="true">Generating</span>
-          <figcaption>Generated shot</figcaption>
-        </figure>
-        <figure class="frame f-ad">
-          <div class="grid" aria-hidden="true">
-            <span style="background-image:url(/img/process/hook-a.webp)"><b>Hook A</b></span><span style="background-image:url(/img/process/hook-b.webp)"><b>Hook B</b></span><span style="background-image:url(/img/process/hook-c.webp)"><b>Hook C</b></span><span style="background-image:url(/img/process/hook-d.webp)"><b>Hook D</b></span>
-          </div>
-          <figcaption>4 hooks</figcaption>
-        </figure>
-      </div>
-      <ol class="steps">
-        <li data-reveal><img class="step-icon" src="/img/process/icon-brief.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><h3>Brief</h3><p>You send the product, the offer and any ads that already work for you. We study your buyers and your competitors.</p></li>
-        <li data-reveal><img class="step-icon" src="/img/process/icon-scripts.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><h3>Scripts</h3><p>We adapt proven structures from top-selling videos into scripts for your product. You approve them before anything is made.</p></li>
-        <li data-reveal><img class="step-icon" src="/img/process/icon-production.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><h3>Production</h3><p>We generate the footage with AI video tools and refine performance, pacing and the details that make it look real.</p></li>
-        <li data-reveal><img class="step-icon" src="/img/process/icon-delivery.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><h3>Delivery</h3><p>Final files with captions, ready to upload, plus hook variations for testing. Revisions included.</p></li>
+        </li>
       </ol>
-      </div>
     </div>
   </section>
 
