@@ -17,6 +17,7 @@
 <meta property="og:url" content="https://calvairegroup.com/">
 <meta property="og:image" content="https://calvairegroup.com/img/icon-512.png">
 <meta name="twitter:card" content="summary">
+<script>document.documentElement.classList.add("js")</script>
 <style>
 :root{
   /* Brand palette: white, black, deep sea blue. Light gray only to break up the page. */
@@ -60,17 +61,66 @@ header .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 .btn-ghost:hover{background:var(--ink);color:var(--white)}
 header .btn{min-height:42px;padding:0 18px;font-size:.95rem}
 
-/* Hero */
-.hero{padding:clamp(28px,6vw,72px) 0 clamp(56px,9vw,120px)}
-.hero-grid{display:grid;gap:clamp(36px,6vw,72px)}
-.hero h1{margin-bottom:24px}
-.hero .lede{margin-bottom:32px}
+/* Sticky header */
+header{position:sticky;top:0;z-index:50;transition:padding .3s ease,box-shadow .3s ease}
+header.scrolled{padding:10px 0;box-shadow:0 1px 0 rgba(255,255,255,.08)}
+
+/* Hero with video background */
+.hero{position:relative;overflow:hidden;background:var(--sea);color:var(--white);min-height:calc(100svh - 76px);display:flex;align-items:flex-end;padding:clamp(56px,10vw,120px) 0 clamp(48px,8vw,96px)}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg video{display:block;object-fit:cover;background:var(--sea)}
+.hero-mobile{position:absolute;inset:0;width:100%;height:100%}
+.wall{display:none}
+.scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,42,63,.3) 0%,rgba(11,42,63,.7) 42%,rgba(11,42,63,.97) 78%)}
+.hero-content{position:relative;z-index:1;width:100%}
+.hero h1{margin-bottom:24px;max-width:12ch}
+.hero .lede{margin-bottom:32px;color:rgba(255,255,255,.86)}
+.hero .btn-key{background:var(--white);border-color:var(--white);color:var(--sea)}
+.hero .btn-key:hover{background:transparent;color:var(--white)}
+.hero .btn-ghost{border-color:var(--white);color:var(--white)}
+.hero .btn-ghost:hover{background:var(--white);color:var(--sea)}
+.hero :focus-visible{outline-color:var(--white)}
 .cta-row{display:flex;flex-wrap:wrap;gap:12px}
+@media (min-width:820px){
+  .hero{align-items:center;min-height:min(calc(100svh - 76px),860px)}
+  .hero-bg .hero-mobile{display:none}
+  .wall{display:grid;position:absolute;top:-8%;bottom:-8%;right:-3%;width:min(54%,820px);grid-template-columns:repeat(4,1fr);gap:16px;transform:rotate(-4deg)}
+  .wall .col{display:grid;align-content:center;animation:drift 18s ease-in-out infinite alternate}
+  .wall .col:nth-child(even){animation-direction:alternate-reverse;animation-duration:22s}
+  .wall video{width:100%;aspect-ratio:9/16;border-radius:18px}
+  .scrim{background:linear-gradient(90deg,var(--sea) 0%,var(--sea) 26%,rgba(11,42,63,.72) 48%,rgba(11,42,63,.2) 100%)}
+}
+@keyframes drift{from{transform:translateY(-7%)}to{transform:translateY(7%)}}
+
+/* Hero entrance: one orchestrated sequence */
+.js .hero h1 .ln{display:block;overflow:hidden;padding-bottom:.06em}
+.js .hero h1 .ln>span{display:block;transform:translateY(105%);transition:transform .9s cubic-bezier(.2,.7,.1,1)}
+.js .hero h1 .ln:nth-child(2)>span{transition-delay:.12s}
+.js .hero .lede,.js .hero .cta-row{opacity:0;transform:translateY(16px);transition:opacity .7s ease .35s,transform .7s cubic-bezier(.2,.7,.1,1) .35s}
+.js .hero .cta-row{transition-delay:.48s}
+.js .hero-bg{opacity:0;transform:scale(1.06);transition:opacity 1.4s ease,transform 2.2s cubic-bezier(.2,.7,.1,1)}
+.loaded .hero h1 .ln>span{transform:none}
+.loaded .hero .lede,.loaded .hero .cta-row{opacity:1;transform:none}
+.loaded .hero-bg{opacity:1;transform:none}
+
+/* Marquee */
+.marquee{background:var(--white);border-bottom:1px solid var(--line);overflow:hidden;padding:clamp(18px,3vw,28px) 0}
+.marquee-track{display:flex;width:max-content;animation:marq 38s linear infinite}
+.marquee ul{display:flex;align-items:center;list-style:none;padding:0;flex-shrink:0}
+.marquee li{display:flex;align-items:center;gap:clamp(18px,3vw,36px);padding-right:clamp(18px,3vw,36px);font-variation-settings:"wdth" 125;font-weight:800;font-size:clamp(1.5rem,4vw,3rem);letter-spacing:-.02em;white-space:nowrap}
+.marquee li img{height:.9em;width:auto}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* Scroll reveals */
+.js [data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.1,1);transition-delay:calc(var(--i,0) * 90ms)}
+.js [data-reveal].in{opacity:1;transform:none}
 
 /* The memorable thing: a 9:16 frame being keyed out */
 .frames{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,2vw,20px);align-items:end}
 .frame{position:relative;aspect-ratio:9/16;border-radius:18px;overflow:hidden;background:var(--gray);border:1.5px solid var(--line)}
 .frame figcaption{position:absolute;left:10px;right:10px;bottom:10px;font-size:.8rem;font-weight:600;font-variation-settings:"wdth" 75}
+.process-grid{display:grid;gap:clamp(40px,6vw,80px)}
 .f-script{padding:14px}
 .f-script .lines{max-height:calc(100% - 34px);overflow:hidden;font-variation-settings:"wdth" 75;font-size:clamp(.62rem,1.3vw,.85rem);line-height:1.35;color:var(--mute)}
 .f-script .lines b{color:var(--ink);display:block;margin-top:.5em}
@@ -79,12 +129,15 @@ header .btn{min-height:42px;padding:0 18px;font-size:.95rem}
   background:
     radial-gradient(110% 60% at 30% 20%,rgba(255,255,255,.32) 0,transparent 60%),
     linear-gradient(175deg,var(--sea) 0,var(--sea) 45%,var(--ink));
-  clip-path:inset(100% 0 0 0);animation:key 1.6s cubic-bezier(.7,0,.2,1) .5s forwards}
+  clip-path:inset(100% 0 0 0)}
+.frames.in .scene{animation:key 1.6s cubic-bezier(.7,0,.2,1) .3s forwards}
 .f-key .person{position:absolute;left:22%;right:22%;bottom:0;height:58%;border-radius:48% 48% 0 0/36% 36% 0 0;background:var(--ink)}
 .f-key .person::before{content:"";position:absolute;left:28%;right:28%;top:-34%;aspect-ratio:1;border-radius:50%;background:var(--ink)}
-.f-key .cap{position:absolute;left:8%;right:8%;top:16%;text-align:center;font-weight:800;font-variation-settings:"wdth" 90;font-size:clamp(.7rem,1.6vw,1.05rem);line-height:1.15;color:#fff;text-shadow:0 2px 0 #000;opacity:0;animation:fade .4s 2s forwards}
-.f-key figcaption{color:#fff;text-shadow:0 1px 2px #000;opacity:0;animation:fade .4s 2s forwards}
-.f-key .keylabel{position:absolute;left:10px;bottom:10px;font-size:.8rem;font-weight:700;color:var(--white);font-variation-settings:"wdth" 75;animation:fadeout .3s 1.4s forwards}
+.f-key .cap{position:absolute;left:8%;right:8%;top:16%;text-align:center;font-weight:800;font-variation-settings:"wdth" 90;font-size:clamp(.7rem,1.6vw,1.05rem);line-height:1.15;color:#fff;text-shadow:0 2px 0 #000;opacity:0}
+.frames.in .cap,.frames.in .f-key figcaption{animation:fade .4s 1.8s forwards}
+.f-key figcaption{color:#fff;text-shadow:0 1px 2px #000;opacity:0}
+.f-key .keylabel{position:absolute;left:10px;bottom:10px;font-size:.8rem;font-weight:700;color:var(--white);font-variation-settings:"wdth" 75}
+.frames.in .keylabel{animation:fadeout .3s 1.2s forwards}
 .f-ad{background:var(--ink);border-color:var(--ink);color:var(--white)}
 .f-ad .grid{position:absolute;inset:12px 12px 40px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .f-ad .grid span{border-radius:8px;background:var(--sea);display:grid;place-items:center;font-size:.7rem;font-weight:700;color:var(--white);font-variation-settings:"wdth" 75}
@@ -92,6 +145,10 @@ header .btn{min-height:42px;padding:0 18px;font-size:.95rem}
 @keyframes fade{to{opacity:1}}
 @keyframes fadeout{to{opacity:0}}
 @media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js [data-reveal],.js .hero .lede,.js .hero .cta-row,.js .hero-bg{opacity:1!important;transform:none!important}
+  .js .hero h1 .ln>span{transform:none!important}
+  .marquee-track{flex-wrap:wrap}
   .f-key .scene{animation:none;clip-path:none}
   .f-key .cap,.f-key figcaption{animation:none;opacity:1}
   .f-key .keylabel{display:none}
@@ -145,8 +202,21 @@ details[open] summary::after{transform:rotate(45deg)}
 details p{color:var(--mute);margin-top:10px}
 
 /* Contact */
+.contact{position:relative;overflow:hidden;background:var(--sea);color:var(--white)}
+.contact-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+.contact::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,42,63,.6),rgba(11,42,63,.9))}
+.contact .wrap{position:relative;z-index:1}
 .contact h2.display{max-width:14ch;margin-bottom:20px}
-.contact .lede{margin-bottom:32px}
+.contact .lede{margin-bottom:32px;color:rgba(255,255,255,.86)}
+.contact .btn-key{background:var(--white);border-color:var(--white);color:var(--sea)}
+.contact .btn-key:hover{background:transparent;color:var(--white)}
+.contact :focus-visible{outline-color:var(--white)}
+
+/* Small hover details */
+.btn{transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .2s ease}
+.btn:active{transform:scale(.97)}
+.formats h3{transition:transform .3s cubic-bezier(.2,.7,.1,1)}
+@media (hover:hover){.formats li:hover h3{transform:translateX(8px)}}
 footer{padding:28px 0 40px;font-size:.9rem;color:var(--mute);border-top:1.5px solid var(--line)}
 footer .wrap{display:grid;gap:20px}
 .foot-co{line-height:1.6}
@@ -157,11 +227,9 @@ footer .wrap{display:grid;gap:20px}
 @media (min-width:820px){footer .wrap{grid-template-columns:1.4fr 1fr;align-items:start}.foot-nav{justify-content:flex-end}.foot-copy{grid-column:1/-1}}
 
 @media (min-width:820px){
-  .f-script{transform:translateY(-6%)}
-  .f-key{transform:translateY(-14%)}
-  .hero-grid{grid-template-columns:1.15fr 1fr;align-items:center}
+  .process-grid{grid-template-columns:1fr 1.1fr;align-items:center}
   .formats li{grid-template-columns:minmax(220px,1fr) 1.6fr;align-items:baseline}
-  .steps{grid-template-columns:repeat(2,1fr);gap:40px 56px}
+  .steps{gap:36px}
   .creator-grid{grid-template-columns:1fr 1fr;align-items:start}
 }
 @media (max-width:420px){
@@ -183,17 +251,71 @@ footer .wrap{display:grid;gap:20px}
 
 <main id="top">
   <div class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <h1 class="display">AI video ads, scripted to sell.</h1>
-        <p class="lede">We script from videos that already convert, generate them with AI and review every frame. You get ready-to-run ads for TikTok, Reels and Meta.</p>
-        <div class="cta-row">
-          <a class="btn btn-key" href="#contact">Contact</a>
-          <a class="btn btn-ghost" href="#work">See our work</a>
-        </div>
+    <div class="hero-bg" aria-hidden="true">
+      <video class="hero-mobile" data-src="/bg/hero-mobile.mp4" poster="/bg/hero-mobile.jpg" muted loop playsinline preload="none"></video>
+      <div class="wall">
+      <div class="col"><video data-src="/bg/wall-ai-1.mp4" poster="/bg/wall-ai-1.jpg" muted loop playsinline preload="none"></video></div>
+      <div class="col"><video data-src="/bg/wall-ai-4.mp4" poster="/bg/wall-ai-4.jpg" muted loop playsinline preload="none"></video></div>
+      <div class="col"><video data-src="/bg/wall-ai-3.mp4" poster="/bg/wall-ai-3.jpg" muted loop playsinline preload="none"></video></div>
+      <div class="col"><video data-src="/bg/wall-ai-2.mp4" poster="/bg/wall-ai-2.jpg" muted loop playsinline preload="none"></video></div>
       </div>
+      <div class="scrim"></div>
+    </div>
+    <div class="wrap hero-content">
+      <h1 class="display"><span class="ln"><span>AI video ads,</span></span><span class="ln"><span>scripted to sell.</span></span></h1>
+      <p class="lede">We script from videos that already convert, generate them with AI and review every frame. You get ready-to-run ads for TikTok, Reels and Meta.</p>
+      <div class="cta-row">
+        <a class="btn btn-key" href="#contact">Contact</a>
+        <a class="btn btn-ghost" href="#work">See our work</a>
+      </div>
+    </div>
+  </div>
 
-      <div class="frames" aria-label="From script to finished ad">
+  <div class="marquee" aria-label="Formats we make">
+    <div class="marquee-track">
+      <ul><li>UGC ads<img src="/img/top-black.png" alt="" width="96" height="112"></li><li>Product demos<img src="/img/top-black.png" alt="" width="96" height="112"></li><li>Hook variations<img src="/img/top-black.png" alt="" width="96" height="112"></li><li>Podcast cuts<img src="/img/top-black.png" alt="" width="96" height="112"></li><li>Voiceovers<img src="/img/top-black.png" alt="" width="96" height="112"></li><li>Localised versions<img src="/img/top-black.png" alt="" width="96" height="112"></li></ul>
+      <ul aria-hidden="true"><li>UGC ads<img src="/img/top-black.png" alt="" width="96" height="112"></li><li>Product demos<img src="/img/top-black.png" alt="" width="96" height="112"></li><li>Hook variations<img src="/img/top-black.png" alt="" width="96" height="112"></li><li>Podcast cuts<img src="/img/top-black.png" alt="" width="96" height="112"></li><li>Voiceovers<img src="/img/top-black.png" alt="" width="96" height="112"></li><li>Localised versions<img src="/img/top-black.png" alt="" width="96" height="112"></li></ul>
+    </div>
+  </div>
+
+  <section class="work" id="work">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2 class="display">Made with AI. Made to sell.</h2>
+        <p class="lede">Recent ads for a haircare brand, fully generated with AI. Tap a video to turn the sound on.</p>
+      </div>
+      <div class="reel">
+        <figure data-reveal style="--i:0"><video src="videos/ai-1.mp4" poster="videos/ai-1.jpg" controls muted loop playsinline preload="metadata"></video><figcaption>Creator tips format</figcaption></figure>
+        <figure data-reveal style="--i:1"><video src="videos/ai-4.mp4" poster="videos/ai-4.jpg" controls muted loop playsinline preload="metadata"></video><figcaption>POV transformation</figcaption></figure>
+        <figure data-reveal style="--i:2"><video src="videos/ai-3.mp4" poster="videos/ai-3.jpg" controls muted loop playsinline preload="metadata"></video><figcaption>Selfie UGC hook</figcaption></figure>
+        <figure data-reveal style="--i:3"><video src="videos/ai-2.mp4" poster="videos/ai-2.jpg" controls muted loop playsinline preload="metadata"></video><figcaption>Podcast clip format</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="formats">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2 class="display">What we make</h2>
+        <p class="lede">Short-form video built for paid social and TikTok Shop, in vertical 9:16.</p>
+      </div>
+      <ul class="formats">
+        <li data-reveal style="--i:0"><h3>UGC-style ads</h3><p>Someone talking to camera about your product, the way real customers do. Written from the pains and words your buyers actually use.</p></li>
+        <li data-reveal style="--i:1"><h3>Product demos</h3><p>Your product in use, close up, with the result on screen in the first seconds.</p></li>
+        <li data-reveal style="--i:2"><h3>Hook variations</h3><p>One winning body, several openings. Test which first three seconds hold attention without reshooting.</p></li>
+        <li data-reveal style="--i:3"><h3>Voiceover and podcast cuts</h3><p>Narrated explainers and two-person conversation formats for brands that sell on a story.</p></li>
+        <li data-reveal style="--i:4"><h3>Localised versions</h3><p>The same ad adapted for Spain, Italy, Germany or English-speaking markets, in the language and tone of each.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2 class="display">How it works</h2>
+      </div>
+      <div class="process-grid">
+      <div class="frames" data-reveal aria-label="From script to finished ad">
         <figure class="frame f-script">
           <div class="lines" aria-hidden="true">
             <b>Hook</b>“I stopped buying this for one reason…”
@@ -218,66 +340,28 @@ footer .wrap{display:grid;gap:20px}
           <figcaption>4 hooks</figcaption>
         </figure>
       </div>
-    </div>
-  </div>
-
-  <section class="work" id="work">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="display">Made with AI. Made to sell.</h2>
-        <p class="lede">Recent ads for a haircare brand, fully generated with AI. Tap a video to turn the sound on.</p>
-      </div>
-      <div class="reel">
-        <figure><video src="videos/ai-1.mp4" poster="videos/ai-1.jpg" controls muted loop playsinline preload="metadata"></video><figcaption>Creator tips format</figcaption></figure>
-        <figure><video src="videos/ai-4.mp4" poster="videos/ai-4.jpg" controls muted loop playsinline preload="metadata"></video><figcaption>POV transformation</figcaption></figure>
-        <figure><video src="videos/ai-3.mp4" poster="videos/ai-3.jpg" controls muted loop playsinline preload="metadata"></video><figcaption>Selfie UGC hook</figcaption></figure>
-        <figure><video src="videos/ai-2.mp4" poster="videos/ai-2.jpg" controls muted loop playsinline preload="metadata"></video><figcaption>Podcast clip format</figcaption></figure>
-      </div>
-    </div>
-  </section>
-
-  <section class="band" id="formats">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="display">What we make</h2>
-        <p class="lede">Short-form video built for paid social and TikTok Shop, in vertical 9:16.</p>
-      </div>
-      <ul class="formats">
-        <li><h3>UGC-style ads</h3><p>Someone talking to camera about your product, the way real customers do. Written from the pains and words your buyers actually use.</p></li>
-        <li><h3>Product demos</h3><p>Your product in use, close up, with the result on screen in the first seconds.</p></li>
-        <li><h3>Hook variations</h3><p>One winning body, several openings. Test which first three seconds hold attention without reshooting.</p></li>
-        <li><h3>Voiceover and podcast cuts</h3><p>Narrated explainers and two-person conversation formats for brands that sell on a story.</p></li>
-        <li><h3>Localised versions</h3><p>The same ad adapted for Spain, Italy, Germany or English-speaking markets, in the language and tone of each.</p></li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="process">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="display">How it works</h2>
-      </div>
       <ol class="steps">
-        <li><h3>Brief</h3><p>You send the product, the offer and any ads that already work for you. We study your buyers and your competitors.</p></li>
-        <li><h3>Scripts</h3><p>We adapt proven structures from top-selling videos into scripts for your product. You approve them before anything is made.</p></li>
-        <li><h3>Production</h3><p>We generate the footage with AI video tools and refine performance, pacing and the details that make it look real.</p></li>
-        <li><h3>Delivery</h3><p>Final files with captions, ready to upload, plus hook variations for testing. Revisions included.</p></li>
+        <li data-reveal style="--i:0"><h3>Brief</h3><p>You send the product, the offer and any ads that already work for you. We study your buyers and your competitors.</p></li>
+        <li data-reveal style="--i:1"><h3>Scripts</h3><p>We adapt proven structures from top-selling videos into scripts for your product. You approve them before anything is made.</p></li>
+        <li data-reveal style="--i:2"><h3>Production</h3><p>We generate the footage with AI video tools and refine performance, pacing and the details that make it look real.</p></li>
+        <li data-reveal style="--i:3"><h3>Delivery</h3><p>Final files with captions, ready to upload, plus hook variations for testing. Revisions included.</p></li>
       </ol>
+      </div>
     </div>
   </section>
 
   <section class="creator" id="creator">
     <div class="wrap creator-grid">
-      <div class="section-head">
+      <div class="section-head" data-reveal>
         <h2 class="display">No casting. No shoots. No waiting on creators.</h2>
         <p>Every video is planned, scripted and produced in one place, so the ad that ships matches the script you approved.</p>
       </div>
       <div>
-        <blockquote>AI makes the footage. Knowing what sells is the part you can’t generate.</blockquote>
+        <blockquote data-reveal>AI makes the footage. Knowing what sells is the part you can’t generate.</blockquote>
         <ul class="facts" style="margin-top:32px">
-          <li>Scripts built on structures from videos with proven sales, not guesswork.</li>
-          <li>Versions for Spain, Italy, Germany and English-speaking markets.</li>
-          <li>One point of contact from brief to delivery.</li>
+          <li data-reveal style="--i:0">Scripts built on structures from videos with proven sales, not guesswork.</li>
+          <li data-reveal style="--i:1">Versions for Spain, Italy, Germany and English-speaking markets.</li>
+          <li data-reveal style="--i:2">One point of contact from brief to delivery.</li>
         </ul>
       </div>
     </div>
@@ -285,35 +369,36 @@ footer .wrap{display:grid;gap:20px}
 
   <section id="faq">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" data-reveal>
         <h2 class="display">Questions</h2>
       </div>
-      <details>
+      <details data-reveal>
         <summary>Will the videos look like AI?</summary>
         <p>We direct them to look like native creator content: natural delivery, real-world settings and the imperfections people expect on TikTok and Reels. Every video is reviewed before it reaches you.</p>
       </details>
-      <details>
+      <details data-reveal>
         <summary>Do I need to send my product?</summary>
         <p>Usually product photos and existing footage are enough. For close-up demos we may ask for a sample.</p>
       </details>
-      <details>
+      <details data-reveal>
         <summary>Can I run these as paid ads?</summary>
         <p>Yes. You own the final files and can use them in paid campaigns on TikTok, Meta and YouTube.</p>
       </details>
-      <details>
+      <details data-reveal>
         <summary>What languages do you work in?</summary>
         <p>English, Spanish, Italian and German.</p>
       </details>
-      <details>
+      <details data-reveal>
         <summary>How fast is delivery?</summary>
         <p>We agree a timeline on the call, based on volume and formats.</p>
       </details>
     </div>
   </section>
 
-  <section class="contact band" id="contact">
+  <section class="contact" id="contact">
+    <video class="contact-bg" data-src="/bg/contact-blur.mp4" poster="/bg/contact-blur.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
     <div class="wrap">
-      <h2 class="display">Tell us what you sell.</h2>
+      <h2 class="display" data-reveal>Tell us what you sell.</h2>
       <p class="lede">Send us your product and the ads you run today. We reply with script ideas either way.</p>
       <div class="cta-row">
         <a class="btn btn-key" href="mailto:info@calvairegroup.com?subject=AI%20video%20ads">Contact</a>
@@ -340,23 +425,58 @@ footer .wrap{display:grid;gap:20px}
 
 <script>
 (function(){
-  var vids=document.querySelectorAll('.reel video');
-  if(!('IntersectionObserver' in window)) return;
-  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      var v=e.target;
-      if(e.isIntersecting){ v.play().catch(function(){}); }
-      else if(!v.paused){ v.pause(); }
+  var root=document.documentElement;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var conn=navigator.connection||{};
+  var lite=reduce||conn.saveData||/(^|-)2g$/.test(conn.effectiveType||'');
+  var hasIO='IntersectionObserver' in window;
+
+  // Hero entrance
+  var go=function(){root.classList.add('loaded')};
+  requestAnimationFrame(function(){requestAnimationFrame(go)}); setTimeout(go,120);
+
+  // Header shrinks after scrolling
+  var header=document.querySelector('header');
+  var onScroll=function(){header.classList.toggle('scrolled',window.scrollY>24)};
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // Background videos: load only the set that fits the screen, play only while visible
+  function load(v){ if(!v.src&&v.dataset.src){ v.src=v.dataset.src; } }
+  function play(v){ load(v); var p=v.play(); if(p&&p.catch)p.catch(function(){}); }
+  var desktop=window.matchMedia('(min-width:820px)');
+  function heroSet(){ return desktop.matches ? document.querySelectorAll('.wall video') : document.querySelectorAll('.hero-mobile'); }
+  var bgObs = hasIO && !lite ? new IntersectionObserver(function(es){
+    es.forEach(function(e){ e.isIntersecting ? play(e.target) : e.target.pause(); });
+  },{rootMargin:'200px 0px'}) : null;
+  function wireHero(){
+    if(!bgObs) return;
+    document.querySelectorAll('.hero-bg video').forEach(function(v){ bgObs.unobserve(v); v.pause(); });
+    heroSet().forEach(function(v){ bgObs.observe(v); });
+  }
+  wireHero();
+  if(desktop.addEventListener) desktop.addEventListener('change',wireHero);
+  var cbg=document.querySelector('.contact-bg'); if(bgObs&&cbg) bgObs.observe(cbg);
+
+  // Scroll reveals
+  var rev=document.querySelectorAll('[data-reveal]');
+  if(!hasIO||reduce){ rev.forEach(function(el){el.classList.add('in')}); }
+  else{
+    var ro=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } });
+    },{threshold:.15,rootMargin:'0px 0px -8% 0px'});
+    rev.forEach(function(el){ro.observe(el)});
+  }
+
+  // Showcase videos: autoplay muted in view, first tap turns sound on
+  if(hasIO && !reduce){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){ var v=e.target; if(e.isIntersecting){ var p=v.play(); if(p&&p.catch)p.catch(function(){}); } else if(!v.paused){ v.pause(); } });
+    },{threshold:0.6});
+    document.querySelectorAll('.reel video').forEach(function(v){
+      io.observe(v);
+      v.addEventListener('click',function(ev){ if(v.muted&&!v.paused){ ev.preventDefault(); v.muted=false; } });
     });
-  },{threshold:0.6});
-  vids.forEach(function(v){
-    io.observe(v);
-    // first tap on a muted autoplaying video turns the sound on instead of pausing it
-    v.addEventListener('click',function(ev){
-      if(v.muted && !v.paused){ ev.preventDefault(); v.muted=false; }
-    });
-  });
+  }
 })();
 </script>
 </body>
