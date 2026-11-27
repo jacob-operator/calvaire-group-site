@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calvaire Group — AI video ads, directed by a creator</title>
+<meta name="description" content="Calvaire Group makes AI video ads for e-commerce brands: scripted from winning videos, directed by our in-house creator, delivered ready for TikTok, Reels and Meta.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Brand palette: white, black, deep sea blue. Light gray only to break up the page. */
+  --white:#FFFFFF;
+  --ink:#000000;
+  --sea:#0B2A3F;
+  --gray:#F3F4F5;
+  --mute:rgba(0,0,0,.66);   /* black at lower opacity for secondary text */
+  --line:rgba(0,0,0,.14);   /* black hairlines */
+  --wide:"Archivo",system-ui,sans-serif;
+  --measure:62ch;
+  --pad:clamp(20px,5vw,64px);
+}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--white);color:var(--ink);font:400 1.0625rem/1.55 var(--wide);font-variation-settings:"wdth" 100}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 var(--pad)}
+
+/* Type: one family, width does the work */
+.display{font-variation-settings:"wdth" 125;font-weight:800;letter-spacing:-.02em;line-height:.98}
+.narrow{font-variation-settings:"wdth" 68;font-weight:600}
+h1.display{font-size:clamp(2.6rem,8.4vw,6.6rem)}
+h2.display{font-size:clamp(1.9rem,4.6vw,3.4rem);max-width:18ch}
+h3{font-size:1.25rem;font-weight:700;line-height:1.25}
+p{max-width:var(--measure)}
+.lede{font-size:clamp(1.125rem,2vw,1.375rem);color:var(--mute);max-width:44ch}
+
+/* Header */
+header{padding:22px 0}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.brand{font-variation-settings:"wdth" 125;font-weight:800;font-size:1.125rem;letter-spacing:-.01em;text-decoration:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:999px;font-weight:700;text-decoration:none;border:2px solid var(--ink)}
+.btn-key{background:var(--sea);border-color:var(--sea);color:var(--white)}
+.btn-key:hover{background:var(--ink);border-color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--white)}
+header .btn{min-height:42px;padding:0 18px;font-size:.95rem}
+
+/* Hero */
+.hero{padding:clamp(28px,6vw,72px) 0 clamp(56px,9vw,120px)}
+.hero-grid{display:grid;gap:clamp(36px,6vw,72px)}
+.hero h1{margin-bottom:24px}
+.hero .lede{margin-bottom:32px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+
+/* The memorable thing: a 9:16 frame being keyed out */
+.frames{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,2vw,20px);align-items:end}
+.frame{position:relative;aspect-ratio:9/16;border-radius:18px;overflow:hidden;background:var(--gray);border:1.5px solid var(--line)}
+.frame figcaption{position:absolute;left:10px;right:10px;bottom:10px;font-size:.8rem;font-weight:600;font-variation-settings:"wdth" 75}
+.f-script{padding:14px;transform:translateY(-6%)}
+.f-script .lines{max-height:calc(100% - 34px);overflow:hidden;font-variation-settings:"wdth" 75;font-size:clamp(.62rem,1.3vw,.85rem);line-height:1.35;color:var(--mute)}
+.f-script .lines b{color:var(--ink);display:block;margin-top:.5em}
+.f-key{background:var(--sea);border-color:var(--sea);transform:translateY(-14%)}
+.f-key .scene{position:absolute;inset:0;
+  background:
+    radial-gradient(110% 60% at 30% 20%,rgba(255,255,255,.32) 0,transparent 60%),
+    linear-gradient(175deg,var(--sea) 0,var(--sea) 45%,var(--ink));
+  clip-path:inset(100% 0 0 0);animation:key 1.6s cubic-bezier(.7,0,.2,1) .5s forwards}
+.f-key .person{position:absolute;left:22%;right:22%;bottom:0;height:58%;border-radius:48% 48% 0 0/36% 36% 0 0;background:var(--ink)}
+.f-key .person::before{content:"";position:absolute;left:28%;right:28%;top:-34%;aspect-ratio:1;border-radius:50%;background:var(--ink)}
+.f-key .cap{position:absolute;left:8%;right:8%;top:16%;text-align:center;font-weight:800;font-variation-settings:"wdth" 90;font-size:clamp(.7rem,1.6vw,1.05rem);line-height:1.15;color:#fff;text-shadow:0 2px 0 #000;opacity:0;animation:fade .4s 2s forwards}
+.f-key figcaption{color:#fff;text-shadow:0 1px 2px #000;opacity:0;animation:fade .4s 2s forwards}
+.f-key .keylabel{position:absolute;left:10px;bottom:10px;font-size:.8rem;font-weight:700;color:var(--white);font-variation-settings:"wdth" 75;animation:fadeout .3s 1.4s forwards}
+.f-ad{background:var(--ink);border-color:var(--ink);color:var(--white)}
+.f-ad .grid{position:absolute;inset:12px 12px 40px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.f-ad .grid span{border-radius:8px;background:var(--sea);display:grid;place-items:center;font-size:.7rem;font-weight:700;color:var(--white);font-variation-settings:"wdth" 75}
+@keyframes key{to{clip-path:inset(0 0 0 0)}}
+@keyframes fade{to{opacity:1}}
+@keyframes fadeout{to{opacity:0}}
+@media (prefers-reduced-motion:reduce){
+  .f-key .scene{animation:none;clip-path:none}
+  .f-key .cap,.f-key figcaption{animation:none;opacity:1}
+  .f-key .keylabel{display:none}
+}
+
+/* Sections */
+section{padding:clamp(56px,9vw,112px) 0}
+.band{background:var(--gray)}
+.section-head{display:grid;gap:18px;margin-bottom:clamp(32px,5vw,56px)}
+.section-head p{color:var(--mute)}
+
+/* Formats: a plain list, not cards */
+.formats{list-style:none;padding:0;display:grid;gap:0}
+.formats li{display:grid;gap:6px 32px;padding:22px 0;border-bottom:1px solid var(--line)}
+.formats li:first-child{border-top:1px solid var(--line)}
+.formats h3{font-variation-settings:"wdth" 112;font-size:clamp(1.25rem,2.4vw,1.6rem)}
+.formats p{color:var(--mute)}
+
+/* Process: a real sequence, so it's numbered */
+.steps{list-style:none;padding:0;counter-reset:s;display:grid;gap:28px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:auto 1fr;gap:4px 18px}
+.steps li::before{content:counter(s);grid-row:span 2;font-variation-settings:"wdth" 125;font-weight:800;font-size:2.4rem;line-height:1;color:var(--ink);min-width:1.4ch}
+.steps p{color:var(--mute)}
+
+/* Creator */
+.creator{background:var(--sea);color:var(--white)}
+.creator .section-head p{color:rgba(255,255,255,.78)}
+.creator-grid{display:grid;gap:40px}
+.creator blockquote{font-variation-settings:"wdth" 112;font-weight:700;font-size:clamp(1.4rem,3vw,2.1rem);line-height:1.2;max-width:24ch}
+.facts{list-style:none;padding:0;display:grid;gap:14px}
+.facts li{padding-left:22px;position:relative;color:rgba(255,255,255,.86);max-width:52ch}
+.facts li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:2px;background:var(--white)}
+
+/* FAQ */
+details{border-bottom:1px solid var(--line);padding:18px 0}
+details:first-of-type{border-top:1px solid var(--line)}
+summary{cursor:pointer;font-weight:700;font-size:1.125rem;list-style:none;display:flex;justify-content:space-between;gap:16px;min-height:32px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-variation-settings:"wdth" 125;font-weight:800;font-size:1.5rem;transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{color:var(--mute);margin-top:10px}
+
+/* Contact */
+.contact h2.display{max-width:14ch;margin-bottom:20px}
+.contact .lede{margin-bottom:32px}
+footer{padding:28px 0 40px;font-size:.9rem;color:var(--mute);border-top:1.5px solid var(--line)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
+@media (min-width:820px){
+  .hero-grid{grid-template-columns:1.15fr 1fr;align-items:center}
+  .formats li{grid-template-columns:minmax(220px,1fr) 1.6fr;align-items:baseline}
+  .steps{grid-template-columns:repeat(2,1fr);gap:40px 56px}
+  .creator-grid{grid-template-columns:1fr 1fr;align-items:start}
+}
+@media (max-width:420px){
+  header .btn{display:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#top">Calvaire Group</a>
+    <a class="btn btn-ghost" href="#contact">Book a call</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1 class="display">AI video ads, directed by a creator who sells.</h1>
+        <p class="lede">We script from videos that already convert, generate them with AI, and our in-house creator directs every frame. You get ready-to-run ads for TikTok, Reels and Meta.</p>
+        <div class="cta-row">
+          <a class="btn btn-key" href="#contact">Book a call</a>
+          <a class="btn btn-ghost" href="#formats">See what we make</a>
+        </div>
+      </div>
+
+      <div class="frames" aria-label="From script to finished ad">
+        <figure class="frame f-script">
+          <div class="lines" aria-hidden="true">
+            <b>Hook</b>“I stopped buying this for one reason…”
+            <b>Problem</b>Close-up, product in hand.
+            <b>Proof</b>Before / after, 3 sec.
+            <b>CTA</b>Link in bio.
+          </div>
+          <figcaption>Script</figcaption>
+        </figure>
+        <figure class="frame f-key">
+          <div class="scene" aria-hidden="true">
+            <div class="person"></div>
+          </div>
+          <div class="cap" aria-hidden="true">I stopped buying this for one reason…</div>
+          <span class="keylabel" aria-hidden="true">Generating</span>
+          <figcaption>Generated shot</figcaption>
+        </figure>
+        <figure class="frame f-ad">
+          <div class="grid" aria-hidden="true">
+            <span>Hook A</span><span>Hook B</span><span>Hook C</span><span>Hook D</span>
+          </div>
+          <figcaption>4 hooks</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+
+  <section class="band" id="formats">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="display">What we make</h2>
+        <p class="lede">Short-form video built for paid social and TikTok Shop, in vertical 9:16.</p>
+      </div>
+      <ul class="formats">
+        <li><h3>UGC-style ads</h3><p>Someone talking to camera about your product, the way real customers do. Written from the pains and words your buyers actually use.</p></li>
+        <li><h3>Product demos</h3><p>Your product in use, close up, with the result on screen in the first seconds.</p></li>
+        <li><h3>Hook variations</h3><p>One winning body, several openings. Test which first three seconds hold attention without reshooting.</p></li>
+        <li><h3>Voiceover and podcast cuts</h3><p>Narrated explainers and two-person conversation formats for brands that sell on a story.</p></li>
+        <li><h3>Localised versions</h3><p>The same ad adapted for Spain, Italy, Germany or English-speaking markets, in the language and tone of each.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="display">How it works</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Brief</h3><p>You send the product, the offer and any ads that already work for you. We study your buyers and your competitors.</p></li>
+        <li><h3>Scripts</h3><p>We adapt proven structures from top-selling videos into scripts for your product. You approve them before anything is made.</p></li>
+        <li><h3>Production</h3><p>We generate the footage with AI video tools. Our creator directs performance, pacing and the details that make it look real.</p></li>
+        <li><h3>Delivery</h3><p>Final files with captions, ready to upload, plus hook variations for testing. Revisions included.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="creator" id="creator">
+    <div class="wrap creator-grid">
+      <div class="section-head">
+        <h2 class="display">One in-house creator. No casting roulette.</h2>
+        <p>Calvaire is run by Yago Moreno, a content creator who also manages TikTok Shop brands day to day. The person writing your scripts is the person directing your videos.</p>
+      </div>
+      <div>
+        <blockquote>AI makes the footage. Knowing what sells is the part you can’t generate.</blockquote>
+        <ul class="facts" style="margin-top:32px">
+          <li>Scripts built on structures from videos with proven sales, not guesswork.</li>
+          <li>Experience running creator content for brands in Spain, Italy and Germany.</li>
+          <li>One point of contact from brief to delivery.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="display">Questions</h2>
+      </div>
+      <details>
+        <summary>Will the videos look like AI?</summary>
+        <p>We direct them to look like native creator content: natural delivery, real-world settings and the imperfections people expect on TikTok and Reels. Every video is reviewed before it reaches you.</p>
+      </details>
+      <details>
+        <summary>Do I need to send my product?</summary>
+        <p>Usually product photos and existing footage are enough. For close-up demos we may ask for a sample.</p>
+      </details>
+      <details>
+        <summary>Can I run these as paid ads?</summary>
+        <p>Yes. You own the final files and can use them in paid campaigns on TikTok, Meta and YouTube.</p>
+      </details>
+      <details>
+        <summary>What languages do you work in?</summary>
+        <p>English, Spanish, Italian and German.</p>
+      </details>
+      <details>
+        <summary>How fast is delivery?</summary>
+        <p>We agree a timeline on the call, based on volume and formats.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="contact band" id="contact">
+    <div class="wrap">
+      <h2 class="display">Tell us what you sell.</h2>
+      <p class="lede">A 20-minute call to look at your product and current ads. You leave with script ideas either way.</p>
+      <div class="cta-row">
+        <a class="btn btn-key" href="mailto:info@calvairegroup.com?subject=AI%20video%20ads">Book a call</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Calvaire Group LLC, Wyoming, USA</span>
+    <span>© 2026 Calvaire Group</span>
+  </div>
+</footer>
+
+</body>
+</html>
