@@ -6,6 +6,7 @@
 <title>Calvaire Group — AI video ads built to sell</title>
 <meta name="description" content="Calvaire Group makes AI video ads for e-commerce brands: scripted from winning videos, generated with AI, delivered ready for TikTok, Reels and Meta.">
 <link rel="stylesheet" href="fonts/fonts.css">
+<link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="canonical" href="https://calvairegroup.com/">
@@ -15,8 +16,11 @@
 <meta property="og:title" content="Calvaire Group — AI video ads built to sell">
 <meta property="og:description" content="AI video ads for e-commerce brands, scripted from videos that already convert and delivered ready for TikTok, Reels and Meta.">
 <meta property="og:url" content="https://calvairegroup.com/">
-<meta property="og:image" content="https://calvairegroup.com/img/icon-512.png">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://calvairegroup.com/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Calvaire Group: AI video ads, scripted to sell">
+<meta name="twitter:card" content="summary_large_image">
 <script>document.documentElement.classList.add("js")</script>
 <style>
 :root{
@@ -308,6 +312,26 @@ footer .wrap{display:grid;gap:20px}
 .creator .section-head p{color:var(--mute)!important}
 .creator .facts li{color:rgba(0,0,0,.78)!important}
 .creator .facts li::before{background:var(--sea)!important}
+
+/* Pricing */
+.pricing{background:var(--white)}
+.plans{display:grid;gap:18px;margin-bottom:22px}
+.plan{padding:clamp(22px,4vw,34px);border-radius:24px;background:linear-gradient(180deg,#123047,var(--sea));color:var(--white);border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 20px 40px rgba(11,42,63,.25)}
+.plan h3{font-variation-settings:"wdth" 112;font-size:1.3rem;margin-bottom:14px}
+.price{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.price .amt{font-variation-settings:"wdth" 125;font-weight:800;font-size:clamp(2.6rem,7vw,3.6rem);letter-spacing:-.02em;line-height:1}
+.price .per,.price .from{color:rgba(255,255,255,.75);font-weight:600}
+.plan-desc{color:rgba(255,255,255,.8)}
+.included{padding:clamp(20px,3vw,28px);border-radius:20px;background:var(--gray);margin-bottom:16px}
+.included h3{margin-bottom:12px}
+.included ul{list-style:none;padding:0;display:grid;gap:10px}
+.included li{position:relative;padding-left:26px}
+.included li::before{content:"";position:absolute;left:0;top:.45em;width:14px;height:8px;border-left:2.5px solid var(--sea);border-bottom:2.5px solid var(--sea);transform:rotate(-45deg)}
+.fine{color:var(--mute);font-size:.92rem;margin-bottom:24px}
+@media (min-width:700px){.plans{grid-template-columns:1fr 1fr;gap:22px}.included ul{grid-template-columns:1fr 1fr}}
+/* form privacy notice */
+.cform .notice{font-size:.85rem;color:var(--mute)}
+.cform .notice a{color:var(--ink)}
 </style>
 </head>
 <body>
@@ -447,7 +471,39 @@ footer .wrap{display:grid;gap:20px}
     </div>
   </section>
 
-  <section id="faq">
+  <section class="pricing" id="pricing">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2 class="display">Pricing</h2>
+        <p class="lede">Simple pricing per video. The price depends on the length of the ad.</p>
+      </div>
+      <div class="plans">
+        <div class="plan" data-reveal>
+          <h3>Short ads</h3>
+          <p class="price"><span class="amt">€150</span> <span class="per">per video</span></p>
+          <p class="plan-desc">Hook-driven ads for TikTok, Reels and Meta.</p>
+        </div>
+        <div class="plan" data-reveal>
+          <h3>Longer ads</h3>
+          <p class="price"><span class="from">up to</span> <span class="amt">€350</span> <span class="per">per video</span></p>
+          <p class="plan-desc">Story, podcast-style and demo formats with more time on screen.</p>
+        </div>
+      </div>
+      <div class="included" data-reveal>
+        <h3>Every video includes</h3>
+        <ul>
+          <li>Script built on structures from proven top-selling videos</li>
+          <li>AI production, reviewed frame by frame</li>
+          <li>Captions and ready-to-upload files in 9:16</li>
+          <li>Revisions</li>
+        </ul>
+      </div>
+      <p class="fine" data-reveal>Prices are per video and exclude VAT, which is added where it applies. You get a written quote before any work starts.</p>
+      <div class="cta-row" data-reveal><a class="btn btn-key" href="#contact" data-open-form>Get a quote</a></div>
+    </div>
+  </section>
+
+  <section class="band" id="faq">
     <div class="wrap">
       <div class="section-head" data-reveal>
         <h2 class="display">Questions</h2>
@@ -513,6 +569,7 @@ footer .wrap{display:grid;gap:20px}
           </div>
         </div>
         <div class="field"><label for="f-msg">Message</label><textarea id="f-msg" name="message" placeholder="What do you sell, and what ads do you run today?"></textarea></div>
+        <p class="notice">We use these details only to reply to your enquiry. Read our <a href="/privacy.html">privacy policy</a>.</p>
         <button class="btn btn-key" type="submit">Send message</button>
       </div>
     </form>
