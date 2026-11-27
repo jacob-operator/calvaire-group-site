@@ -5,9 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Calvaire Group — AI video ads built to sell</title>
 <meta name="description" content="Calvaire Group makes AI video ads for e-commerce brands: scripted from winning videos, generated with AI, delivered ready for TikTok, Reels and Meta.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://calvairegroup.com/">
+<meta name="theme-color" content="#0B2A3F">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Calvaire Group">
+<meta property="og:title" content="Calvaire Group — AI video ads built to sell">
+<meta property="og:description" content="AI video ads for e-commerce brands, scripted from videos that already convert and delivered ready for TikTok, Reels and Meta.">
+<meta property="og:url" content="https://calvairegroup.com/">
+<meta property="og:image" content="https://calvairegroup.com/videos/ai-1.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <style>
 :root{
   /* Brand palette: white, black, deep sea blue. Light gray only to break up the page. */
@@ -139,7 +147,13 @@ details p{color:var(--mute);margin-top:10px}
 .contact h2.display{max-width:14ch;margin-bottom:20px}
 .contact .lede{margin-bottom:32px}
 footer{padding:28px 0 40px;font-size:.9rem;color:var(--mute);border-top:1.5px solid var(--line)}
-footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+footer .wrap{display:grid;gap:20px}
+.foot-co{line-height:1.6}
+.foot-co strong{color:var(--ink)}
+.foot-nav{display:flex;flex-wrap:wrap;gap:8px 24px}
+.foot-nav a,.foot-co a{text-decoration:underline;text-underline-offset:3px}
+.foot-nav a:hover,.foot-co a:hover{color:var(--ink)}
+@media (min-width:820px){footer .wrap{grid-template-columns:1.4fr 1fr;align-items:start}.foot-nav{justify-content:flex-end}.foot-copy{grid-column:1/-1}}
 
 @media (min-width:820px){
   .f-script{transform:translateY(-6%)}
@@ -306,8 +320,17 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
 <footer>
   <div class="wrap">
-    <span>Calvaire Group LLC, Wyoming, USA</span>
-    <span>© 2026 Calvaire Group</span>
+    <div class="foot-co">
+      <strong>Calvaire Group LLC</strong><br>
+      30 N Gould St, Ste R, Sheridan, WY 82801, USA<br>
+      <a href="mailto:info@calvairegroup.com">info@calvairegroup.com</a>
+    </div>
+    <nav class="foot-nav" aria-label="Legal">
+      <a href="privacy.html">Privacy policy</a>
+      <a href="terms.html">Terms of service</a>
+      <a href="legal.html">Legal notice</a>
+    </nav>
+    <div class="foot-copy">© 2026 Calvaire Group LLC. All rights reserved.</div>
   </div>
 </footer>
 
